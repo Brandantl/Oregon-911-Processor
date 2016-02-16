@@ -3,9 +3,7 @@
     Date:   2/12/2016
     Purpose: To store data for an individual unit.
 */
-#include <string>
-
-#define MAX_NUM_UNIT_STATUSES 4
+#include "program.h"
 
 enum class unitStatus {
     dispatched,
