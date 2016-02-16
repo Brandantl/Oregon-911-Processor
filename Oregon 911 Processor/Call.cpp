@@ -11,6 +11,7 @@ Call::Call() {
         time[i] = "00:00:00";
     }
     agencyName = "Unknown";
+    location.lat = location.lon = 0;
 }
 
 void Call::addUnit(Unit thing)
@@ -56,9 +57,9 @@ void    Call::setAgency(const std::string & _agency) {
     agencyName = _agencyName;
 }*/
 
-void    Call::setLocation(struct gps _location) {
+void    Call::setLocation(const struct gps & _location) {
     // So there is location data already loaded.
-    if (location.isInit() && (_location != location)) {
+    if (location.isInit() && (location.operator!=(_location))) {
         // Lets put this location data in the change log.
         locationHistory.push_back(location);
     }

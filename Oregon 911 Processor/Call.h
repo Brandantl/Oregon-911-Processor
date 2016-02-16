@@ -39,7 +39,7 @@ public:
     void                            setCallSummery(const std::string & _callSummery);
     void                            setAgency(const std::string & _agency);
     //void                          setAgencyName(const std::string & _agencyName);
-    void                            setLocation(struct gps _location);
+    void                            setLocation(const struct gps & _location);
     void                            setAddress(const std::string & _address);
 
     // Gets

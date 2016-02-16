@@ -5,6 +5,7 @@
 */
 #pragma once
 #include <string>
+#include "or911.h"
 #include "structs.h"
 
 enum class unitStatus {

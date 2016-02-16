@@ -3,9 +3,9 @@
 
 namespace util
 {
-    inline std::string getAgencyByAbbv(std::string abbv) {
+
+    inline std::string getAgencyByAbbv(const std::string & abbv) {
         std::string ret;
-        knownAgencyList[0].abbv;
         bool stop = false;
         int i = 0;
         while (!stop) {
@@ -13,12 +13,10 @@ namespace util
                 ret = knownAgencyList[i].name;
                 stop = true;
             }
-            else if (knownAgencyList[i].abbv == "") stop = true;
+            else if (knownAgencyList[i].abbv.empty()) stop = true;
             i++;
         }
         return ret;
     }
-
-
 
 }

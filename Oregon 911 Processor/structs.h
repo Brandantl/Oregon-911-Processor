@@ -15,10 +15,10 @@ struct gps {
             return true;
         return false;
     }
-    bool operator== (const gps &loc1) {
+    bool operator== (const gps & loc1) {
         return (lat == loc1.lat && lon == loc1.lon);
     }
-    bool operator!= (const gps &loc1) {
+    bool operator!= (const gps & loc1) {
         return (!this->operator==(loc1));
     }
 };
