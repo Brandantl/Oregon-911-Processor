@@ -11,28 +11,28 @@ void Call::addUnit(Unit thing)
 	unitList[thing.getName()] = thing;
 }
 
-void	Call::removeUnit(const std::string & name) {
+void    Call::removeUnit(const std::string & name) {
 	unitList.erase(name);
 }
 
-bool	Call::doesUnitExist(const std::string & name) {
+bool    Call::doesUnitExist(const std::string & name) {
 	return (unitList.count(name));
 }
 
 // Sets
-void	Call::setCallNumber(int _callNumber) {
+void    Call::setCallNumber(int _callNumber) {
 	callNumber = _callNumber;
 }
 
-void	Call::setCounty(char _county) {
+void    Call::setCounty(char _county) {
 	county = _county;
 }
 
-void	Call::setTime(callTime _idx, std::string _status) {
+void    Call::setTime(callTime _idx, std::string _status) {
 	time[(unsigned int)_idx] = _status;
 }
 
-void	Call::setCallSummery(std::string _callSummery) {
+void    Call::setCallSummery(std::string _callSummery) {
 	if ((!callSummery.empty()) && (_callSummery != callSummery)) {
 		// Add Call Summery to the change log.
 		callSummeryHistory.push_back(callSummery);
@@ -40,15 +40,15 @@ void	Call::setCallSummery(std::string _callSummery) {
 	callSummery = _callSummery;
 }
 
-void	Call::setAgency(std::string _agency) {
+void    Call::setAgency(std::string _agency) {
 	agency = _agency;
 }
 
-void	Call::setAgencyName(std::string _agencyName) {
+void    Call::setAgencyName(std::string _agencyName) {
 	agencyName = _agencyName;
 }
 
-void	Call::setLocation(struct gps _location) {
+void    Call::setLocation(struct gps _location) {
 	// So there is location data already loaded.
 	if (location.isInit() && (_location != location)) {
 		// Lets put this location data in the change log.
@@ -67,39 +67,39 @@ void Call::setAddress(std::string _address)
 }
 
 // Gets
-int	Call::getCallNumber() {
+int    Call::getCallNumber() {
 	return callNumber;
 }
 
-char	Call::getCounty() {
+char    Call::getCounty() {
 	return county;
 }
 
-std::string	Call::getTime(callTime _idx) {
+std::string    Call::getTime(callTime _idx) {
 	return time[(unsigned int)_idx];
 }
 
-std::string	Call::getCallSummery() {
+std::string    Call::getCallSummery() {
 	return callSummery;
 }
 
-std::string	Call::getAgency() {
+std::string    Call::getAgency() {
 	return agency;
 }
 
-std::string	Call::getAgencyName() {
+std::string    Call::getAgencyName() {
 	return agencyName;
 }
 
-struct gps	Call::getLocation() {
+struct gps    Call::getLocation() {
 	return location;
 }
 
-int	Call::getUnitcount() {
+int    Call::getUnitcount() {
 	return unitCount;
 }
 
-std::string	Call::getUnitsString() {
+std::string    Call::getUnitsString() {
 	std::string ret_str;
 	for (auto it : unitList) {
 		ret_str += it.second.getName();
@@ -132,7 +132,7 @@ void Call::clearLocationHistory()
 }
 
 // Processes/Loops
-const class Unit	*	Call::ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f) {
+const class Unit    *    Call::ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f) {
 	class Unit * ret = nullptr;
 	for (auto it : unitList) {
 		if (!f(it.second)) {
@@ -143,7 +143,7 @@ const class Unit	*	Call::ProcessUnitList(const std::function<bool(const class Un
 	return ret;
 }
 
-const std::string	*	Call::ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f) {
+const std::string    *    Call::ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f) {
 	std::string  * ret = nullptr;
 	for (std::vector<std::string>::iterator it = callSummeryHistory.begin(); it != callSummeryHistory.end(); ++it) {
 		if (!f(*it)) {
@@ -154,7 +154,7 @@ const std::string	*	Call::ProcessCallSummeryHistory(const std::function<bool(con
 	return ret;
 }
 
-const std::string	*	Call::ProcessAddressHistory(const std::function<bool(const std::string & history)> & f) {
+const std::string    *    Call::ProcessAddressHistory(const std::function<bool(const std::string & history)> & f) {
 	std::string* ret = nullptr;
 	for (std::vector<std::string>::iterator it = addressHistory.begin(); it != addressHistory.end(); ++it) {
 		if (!f(*it)) {
@@ -165,7 +165,7 @@ const std::string	*	Call::ProcessAddressHistory(const std::function<bool(const s
 	return ret;
 }
 
-const struct gps	*	Call::ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f) {
+const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f) {
 	struct gps* ret = nullptr;
 	for (std::vector<struct gps>::iterator it = locationHistory.begin(); it != locationHistory.end(); ++it) {
 		if (!f(*it)) {
