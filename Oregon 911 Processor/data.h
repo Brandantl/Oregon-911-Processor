@@ -99,4 +99,5 @@ struct agencyList agencies[] =
     "VER","Vernonia Rural Fire Department"
     "USF","United States Forest Service"
     "HUB","Hubbard Fire District"
+    "",""
 };
