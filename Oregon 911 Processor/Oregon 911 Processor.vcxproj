@@ -114,13 +114,13 @@
     <ClInclude Include="data.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="or911.h" />
-    <ClInclude Include="program.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Call.cpp" />
+    <ClCompile Include="data.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

@@ -2,9 +2,13 @@
     Author: Brandan Tyler Lasley
     Date:   2/12/2016
 */
-
-#include "Globals.h"
+#include "or911.h"
+#include "structs.h"
+#include "data.h"
+#include "Unit.h"
 #include "Call.h"
+#include "Utils.h"
+
 #include <iostream>
 
 using namespace std;

@@ -1,5 +1,7 @@
 #pragma once
-#include "program.h"
+#include "Call.h"
+#include "Utils.h"
+
 
 Call::Call() {
     callNumber = 0;
@@ -33,11 +35,11 @@ void    Call::setCounty(char _county) {
     county = _county;
 }
 
-void    Call::setTime(callTime _idx, std::string _status) {
+void    Call::setTime(callTime _idx, const std::string & _status) {
     time[(unsigned int)_idx] = _status;
 }
 
-void    Call::setCallSummery(std::string _callSummery) {
+void    Call::setCallSummery(const std::string & _callSummery) {
     if ((!callSummery.empty()) && (_callSummery != callSummery)) {
         // Add Call Summery to the change log.
         callSummeryHistory.push_back(callSummery);
@@ -45,7 +47,7 @@ void    Call::setCallSummery(std::string _callSummery) {
     callSummery = _callSummery;
 }
 
-void    Call::setAgency(std::string _agency) {
+void    Call::setAgency(const std::string & _agency) {
     agency = _agency;
     agencyName = util::getAgencyByAbbv(_agency);
 }
@@ -63,7 +65,7 @@ void    Call::setLocation(struct gps _location) {
     location = _location;
 }
 
-void Call::setAddress(std::string _address)
+void Call::setAddress(const std::string & _address)
 {
     if ((!address.empty()) && (_address != address)) {
         // Add Call Summery to the change log.
@@ -81,19 +83,19 @@ char    Call::getCounty() {
     return county;
 }
 
-std::string    Call::getTime(callTime _idx) {
+const std::string &    Call::getTime(callTime _idx) {
     return time[(unsigned int)_idx];
 }
 
-std::string    Call::getCallSummery() {
+const std::string &    Call::getCallSummery() {
     return callSummery;
 }
 
-std::string    Call::getAgency() {
+const std::string &    Call::getAgency() {
     return agency;
 }
 
-std::string    Call::getAgencyName() {
+const std::string &    Call::getAgencyName() {
     return agencyName;
 }
 
@@ -117,7 +119,7 @@ std::string    Call::getUnitsString() {
     return ret_str;
 }
 
-std::string Call::setAddress()
+const std::string & Call::setAddress()
 {
     return address;
 }

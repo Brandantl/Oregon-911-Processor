@@ -4,7 +4,12 @@ Date:   2/12/2016
 Purpose: To store data for an individual incident.
 */
 #pragma once
-#include "program.h"
+#include <vector>
+#include <unordered_map>
+#include <functional>
+#include "or911.h"
+#include "structs.h"
+#include "Unit.h"
 
 enum class callTime {
     entry,
@@ -30,24 +35,24 @@ public:
     // Sets
     void                            setCallNumber(int _callNumber);
     void                            setCounty(char _county);
-    void                            setTime(callTime _idx, std::string _status);
-    void                            setCallSummery(std::string _callSummery);
-    void                            setAgency(std::string _agency);
-    //void                          setAgencyName(std::string _agencyName);
+    void                            setTime(callTime _idx, const std::string & _status);
+    void                            setCallSummery(const std::string & _callSummery);
+    void                            setAgency(const std::string & _agency);
+    //void                          setAgencyName(const std::string & _agencyName);
     void                            setLocation(struct gps _location);
-    void                            setAddress(std::string _address);
+    void                            setAddress(const std::string & _address);
 
     // Gets
     int                             getCallNumber();
     char                            getCounty();
-    std::string                     getTime(callTime _idx);
-    std::string                     getCallSummery();
-    std::string                     getAgency();
-    std::string                     getAgencyName();
+    const std::string &             getTime(callTime _idx);
+    const std::string &             getCallSummery();
+    const std::string &             getAgency();
+    const std::string &             getAgencyName();
     struct gps                      getLocation();
     int                             getUnitcount();
     std::string                     getUnitsString();
-    std::string                     setAddress();
+    const std::string &             setAddress();
 
     void                            clearCallSummeryHistory();
     void                            clearAddressHistory();

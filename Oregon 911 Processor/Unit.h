@@ -3,7 +3,9 @@
     Date:   2/12/2016
     Purpose: To store data for an individual unit.
 */
-#include "program.h"
+#pragma once
+#include <string>
+#include "structs.h"
 
 enum class unitStatus {
     dispatched,
