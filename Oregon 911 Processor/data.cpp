@@ -26,6 +26,7 @@ struct agencyList knownAgencyList[] =
     "BOL","Tualatin Valley Fire & Rescue",
     "WFD","Tualatin Valley Fire & Rescue",
     "BTH","Tualatin Valley Fire & Rescue",
+    "RHL","Tualatin Valley Fire & Rescue",
     "HBM","Hillsboro Fire & Rescue",
     "HWH","Hillsboro Fire & Rescue",
     "HRA","Hillsboro Fire & Rescue",
