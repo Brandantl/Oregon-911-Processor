@@ -42,15 +42,15 @@ public:
     void                                                setAddress(const std::string & _address);
 
     // Gets
-    const IncidentHeader&                               getIncidentInfo();
-    const std::string &                                 getTime(callTime _idx);
-    const std::string &                                 getCallSummery();
-    const std::string &                                 getStation();
-    const std::string &                                 getAgency();
-    struct gps                                          getLocation();
-    int                                                 getUnitcount();
-    std::string                                         getUnitsString();
-    const std::string &                                 setAddress();
+    const IncidentHeader&                               getIncidentInfo() const;
+    const std::string &                                 getTime(callTime _idx) const;
+    const std::string &                                 getCallSummery() const;
+    const std::string &                                 getStation() const;
+    const std::string &                                 getAgency() const;
+    struct gps                                          getLocation() const;
+    int                                                 getUnitcount() const;
+    std::string                                         getUnitsString() const;
+    const std::string &                                 setAddress() const;
 
     void                                                clearCallSummeryHistory();
     void                                                clearAddressHistory();

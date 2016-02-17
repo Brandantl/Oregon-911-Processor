@@ -16,6 +16,14 @@ using namespace std;
 int main() {
     cout << "Oregon 911 Importer! \n";
 
+    Call thing;
+    Unit thing2;
+
+    thing.setStation("ALO");
+    thing2.setName("E62", 'W');
+    thing.addUnit(thing2);
+
+    const Unit* x = thing.ProcessUnitList([](const Unit & t) { return false; });
 
     cin.get();
     cin.get();

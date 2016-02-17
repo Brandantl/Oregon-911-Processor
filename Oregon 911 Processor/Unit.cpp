@@ -32,22 +32,22 @@ void Unit::setTime(unitStatus _idx, const std::string & _status)
     this->time[(unsigned int)_idx] = _status;
 }
 
-const std::string & Unit::getName()
+const std::string & Unit::getName() const
 {
     return name;
 }
 
-const std::string & Unit::getAgency()
+const std::string & Unit::getAgency() const
 {
     return agency;
 }
 
-const std::string & Unit::getStation()
+const std::string & Unit::getStation() const
 {
     return station;
 }
 
-const std::string & Unit::getTime(unitStatus _idx)
+const std::string & Unit::getTime(unitStatus _idx) const
 {
     return time[(unsigned int)_idx];
 }

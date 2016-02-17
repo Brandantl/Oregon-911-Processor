@@ -80,36 +80,36 @@ void Call::setAddress(const std::string & _address)
 
 // Gets
 
-const IncidentHeader & Call::getIncidentInfo()
+const IncidentHeader & Call::getIncidentInfo() const
 {
     return incidentInfo;
 }
 
-const std::string &    Call::getTime(callTime _idx) {
+const std::string &    Call::getTime(callTime _idx) const {
     return time[(unsigned int)_idx];
 }
 
-const std::string &    Call::getCallSummery() {
+const std::string &    Call::getCallSummery() const {
     return callSummery;
 }
 
-const std::string &    Call::getStation() {
+const std::string &    Call::getStation() const {
     return station;
 }
 
-const std::string &    Call::getAgency() {
+const std::string &    Call::getAgency() const {
     return agency;
 }
 
-struct gps    Call::getLocation() {
+struct gps    Call::getLocation() const {
     return location;
 }
 
-int    Call::getUnitcount() {
+int    Call::getUnitcount() const {
     return unitCount;
 }
 
-std::string    Call::getUnitsString() {
+std::string    Call::getUnitsString() const {
     std::string ret_str;
     for (auto it : unitList) {
         ret_str += it.second.getName();
@@ -121,7 +121,7 @@ std::string    Call::getUnitsString() {
     return ret_str;
 }
 
-const std::string & Call::setAddress()
+const std::string & Call::setAddress() const
 {
     return address;
 }

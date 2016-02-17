@@ -15,17 +15,16 @@ class Incidents {
 public:
     Incidents();
 
-    void                                                        newImport();                // Clears last import vector.
-
-    void                                                        addOrUpdateIncident(const class Call &);
-    bool                                                        doesIncidentExist(const class Call &);
+    void                                                        addOrUpdateIncident(Call & _call);
+    bool                                                        doesIncidentExist(Call & _call);
 
     void                                                        gc();                       // Garbage collects any dead calls.
 
     // Loops & Stuff
-    const class Call    *                                       ProcessCallList(const std::function<bool(const class Call & _call)> & f);
+    const Call    *                                             ProcessCallList(const std::function<bool(const class Call & _call)> & f);
 
 private:
+
     std::vector<struct IncidentHeader>                          lastImport;                 // callNumber, County
-    std::unordered_map<int, Call>		                        callList;                   // Key is the call number
+    std::unordered_map<int, std::unordered_map<char, Call>>		callList;                   // Key is the call number
 };

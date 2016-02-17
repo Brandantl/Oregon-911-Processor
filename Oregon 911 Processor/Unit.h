@@ -26,10 +26,10 @@ public:
     void        setTime(unitStatus _idx, const std::string & _status);
 
     // Gets
-    const std::string & getName();
-    const std::string & getAgency();
-    const std::string & getStation();
-    const std::string & getTime(unitStatus _idx);
+    const std::string & getName() const;
+    const std::string & getAgency() const;
+    const std::string & getStation() const;
+    const std::string & getTime(unitStatus _idx) const;
 
 private:
     std::string name;
