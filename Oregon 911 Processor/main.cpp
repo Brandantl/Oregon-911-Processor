@@ -20,7 +20,7 @@ int main() {
     Unit thing2;
 
     thing.setStation("ALO");
-    thing2.setName("E62");
+    thing2.setName("E62", 'W');
     thing.addUnit(thing2);
 
     cin.get();

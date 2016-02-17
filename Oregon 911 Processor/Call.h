@@ -79,6 +79,7 @@ private:
     struct callSummeryEventList>                        Flags; // Todo, also I didn't want to resize the whole file to fit that long name.
 
     std::unordered_map<std::string, class Unit>         unitList;
+
     // These operate more like stacks storing data until it's dumped into the database.
     std::vector<std::string>                            callSummeryHistory;
     std::vector<std::string>                            addressHistory;

@@ -20,8 +20,8 @@ public:
     Unit();
 
     // Sets
-    void        setName(const std::string & _name);
-    void        setAgency(const std::string & _agency);
+    void        setName(const std::string & _name, const char & county);
+    void        setAgency(const std::string & _agency);                     // Not required, should be automatically done by setting the name.
     void        setStation(const std::string & _station);
     void        setTime(unitStatus _idx, const std::string & _status);
 

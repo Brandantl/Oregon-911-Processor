@@ -1,5 +1,5 @@
 #include "Unit.h"
-
+#include "Utils.h"
 Unit::Unit()
 {
     for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {
@@ -7,9 +7,10 @@ Unit::Unit()
     }
 }
 
-void Unit::setName(const std::string & _name)
+void Unit::setName(const std::string & _name, const char & county)
 {
     name = _name;
+    agency = util::getAgencyByUnitName(_name, county);
 }
 
 void Unit::setAgency(const std::string & _agency)
