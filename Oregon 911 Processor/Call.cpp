@@ -143,45 +143,41 @@ void Call::clearLocationHistory()
 
 // Processes/Loops
 const class Unit    *    Call::ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f) {
-    class Unit * ret = nullptr;
-    for (auto it : unitList) {
+    for (auto & it : unitList) {
         if (!f(it.second)) {
-            ret = &it.second;
+            return &it.second;
             break;
         }
     }
-    return ret;
+    return nullptr;
 }
 
 const std::string    *    Call::ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f) {
-    std::string  * ret = nullptr;
     for (std::vector<std::string>::iterator it = callSummeryHistory.begin(); it != callSummeryHistory.end(); ++it) {
         if (!f(*it)) {
-            ret = &*it;
+            return &*it;
             break;
         }
     }
-    return ret;
+    return nullptr;
 }
 
 const std::string    *    Call::ProcessAddressHistory(const std::function<bool(const std::string & history)> & f) {
-    std::string* ret = nullptr;
     for (std::vector<std::string>::iterator it = addressHistory.begin(); it != addressHistory.end(); ++it) {
         if (!f(*it)) {
-            ret = &*it;
+            return &*it;
             break;
         }
     }
-    return ret;
+    return nullptr;
 }
 
 const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f) {
-    struct gps* ret = nullptr;
     for (std::vector<struct gps>::iterator it = locationHistory.begin(); it != locationHistory.end(); ++it) {
         if (!f(*it)) {
-            ret = &*it;
+            return &*it;
             break;
         }
     }
-    return ret;
+    return nullptr;
 }
