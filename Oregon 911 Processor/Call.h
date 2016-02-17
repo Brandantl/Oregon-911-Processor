@@ -24,7 +24,7 @@ public:
     Call();
 
     // Add
-    void                                                addUnit(Unit thing);
+    void                                                addUnit(const Unit & thing);
 
     // Remove
     void                                                removeUnit(const std::string & name);
@@ -37,7 +37,7 @@ public:
     void                                                setTime(callTime _idx, const std::string & _status);
     void                                                setCallSummery(const std::string & _callSummery);
     void                                                setStation(const std::string & _station);
-    //void                                              setAgency(const std::string & _agencyName);
+    //void                                              setAgency(const std::string & _agencyName); // This should be set automatically.
     void                                                setLocation(const struct gps & _location);
     void                                                setAddress(const std::string & _address);
 

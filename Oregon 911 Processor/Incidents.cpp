@@ -34,11 +34,13 @@ bool Incidents::doesIncidentExist(Call & _call)
 
 void Incidents::gc()
 {
-    std::vector<struct IncidentHeader> deleteQueue;
+    deleteQueue.clear();
+
+    std::vector<struct IncidentHeader> & dq = deleteQueue;
     std::vector<struct IncidentHeader> & lastImportVar = lastImport; // std::functions doesn't like private alone.
 
     // This gets a list of calls that have been deleted by WCCCA.
-    auto f = [&deleteQueue, &lastImportVar](const Call & _call) {
+    auto f = [&dq, &lastImportVar](const Call & _call) {
         bool found = false;
         const IncidentHeader & callHead = _call.getIncidentInfo();
 
@@ -47,7 +49,7 @@ void Incidents::gc()
                 found = true;
         }
         if (!found) {
-            deleteQueue.push_back(callHead);
+            dq.push_back(callHead);
         }
         return true; 
     };
@@ -69,7 +71,6 @@ void Incidents::gc()
             callList.erase(callHead.callNumber);
         }
     }
-    deleteQueue.clear();
     lastImport.clear();
 }
 
@@ -81,6 +82,17 @@ const Call * Incidents::ProcessCallList(const std::function<bool(const class Cal
                 return &county_it.second;
                 break;
             }
+        }
+    }
+    return nullptr;
+}
+
+const struct IncidentHeader * Incidents::ProcessRecentlyDeleted(const std::function<bool(const struct IncidentHeader&_ih)>& f)
+{
+    for (auto & deleted_it : deleteQueue) {
+        if (!f(deleted_it)) {
+            return &deleted_it;
+            break;
         }
     }
     return nullptr;

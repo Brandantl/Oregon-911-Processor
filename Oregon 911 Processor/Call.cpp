@@ -20,7 +20,7 @@ Call::Call() {
     agency = "Unknown";
 }
 
-void Call::addUnit(Unit thing)
+void Call::addUnit(const Unit & thing)
 {
     unitList[thing.getName()] = thing;
 }

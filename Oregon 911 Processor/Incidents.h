@@ -22,9 +22,11 @@ public:
 
     // Loops & Stuff
     const Call    *                                             ProcessCallList(const std::function<bool(const class Call & _call)> & f);
+    const struct IncidentHeader *                               ProcessRecentlyDeleted(const std::function<bool(const struct IncidentHeader & _ih)> & f);
 
 private:
 
+    std::vector<struct IncidentHeader>                          deleteQueue;
     std::vector<struct IncidentHeader>                          lastImport;                 // callNumber, County
     std::unordered_map<int, std::unordered_map<char, Call>>		callList;                   // Key is the call number
 };
