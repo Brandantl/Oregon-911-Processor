@@ -37,8 +37,8 @@ public:
     void                                                setCounty(char _county);
     void                                                setTime(callTime _idx, const std::string & _status);
     void                                                setCallSummery(const std::string & _callSummery);
-    void                                                setAgency(const std::string & _agency);
-    //void                                              setAgencyName(const std::string & _agencyName);
+    void                                                setStation(const std::string & _station);
+    //void                                              setAgency(const std::string & _agencyName);
     void                                                setLocation(const struct gps & _location);
     void                                                setAddress(const std::string & _address);
 
@@ -47,8 +47,8 @@ public:
     char                                                getCounty();
     const std::string &                                 getTime(callTime _idx);
     const std::string &                                 getCallSummery();
+    const std::string &                                 getStation();
     const std::string &                                 getAgency();
-    const std::string &                                 getAgencyName();
     struct gps                                          getLocation();
     int                                                 getUnitcount();
     std::string                                         getUnitsString();
@@ -70,16 +70,15 @@ private:
     std::string                                         time[MAX_NUM_CALL_STATUSES]; // 4 is the number of statuses. See callTime enum.
     std::string                                         callSummery;
     std::string                                         address;
-    std::string                                         agency;
-    std::string                                         agencyName;
-    int                                                 unitCount;
     std::string                                         station;
+    std::string                                         agency;
+    int                                                 unitCount;
     std::string                                         units;
     struct gps                                          location;
-    std::vector<std::string>                            Flags; // TODO
+    std::unordered_map<std::string, 
+    struct callSummeryEventList>                        Flags; // Todo, also I didn't want to resize the whole file to fit that long name.
 
     std::unordered_map<std::string, class Unit>         unitList;
-
     // These operate more like stacks storing data until it's dumped into the database.
     std::vector<std::string>                            callSummeryHistory;
     std::vector<std::string>                            addressHistory;

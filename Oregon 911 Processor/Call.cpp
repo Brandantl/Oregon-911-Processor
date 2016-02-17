@@ -10,7 +10,7 @@ Call::Call() {
     for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++) {
         time[i] = "00:00:00";
     }
-    agencyName = "Unknown";
+    agency = "Unknown";
     location.lat = location.lon = 0;
 }
 
@@ -48,12 +48,12 @@ void    Call::setCallSummery(const std::string & _callSummery) {
     callSummery = _callSummery;
 }
 
-void    Call::setAgency(const std::string & _agency) {
-    agency = _agency;
-    agencyName = util::getAgencyByAbbv(_agency);
+void    Call::setStation(const std::string & _station) {
+    station = _station;
+    agency = util::getAgencyByStation(_station);
 }
 
-/*void    Call::setAgencyName(std::string _agencyName) {
+/*void    Call::setAgency(std::string _agencyName) {
     agencyName = _agencyName;
 }*/
 
@@ -92,12 +92,12 @@ const std::string &    Call::getCallSummery() {
     return callSummery;
 }
 
-const std::string &    Call::getAgency() {
-    return agency;
+const std::string &    Call::getStation() {
+    return station;
 }
 
-const std::string &    Call::getAgencyName() {
-    return agencyName;
+const std::string &    Call::getAgency() {
+    return agency;
 }
 
 struct gps    Call::getLocation() {

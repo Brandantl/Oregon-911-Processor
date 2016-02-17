@@ -4,7 +4,7 @@
 namespace util
 {
     // Cycles though all of knownAgencyList until it finds what it wants or return a empty string.
-    inline std::string getAgencyByAbbv(const std::string & abbv) {
+    inline std::string getAgencyByStation(const std::string & abbv) {
         std::string ret = "UNK";
         bool stop = false;
         int i = 0;

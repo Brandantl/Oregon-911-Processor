@@ -13,6 +13,21 @@ struct callSummeryEventList {
     std::string Icon;
 };
 
+struct unitInfoList {
+    std::string name;
+    std::string station;
+    std::string abbv;
+    char county;
+    std::string agency;
+};
+
+struct stationInfoList {
+    std::string station;
+    char county;
+    std::string abbv;
+    std::string agency;
+};
+
 struct gps {
     double lat;
     double lon;
