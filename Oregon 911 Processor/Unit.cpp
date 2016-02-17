@@ -2,40 +2,47 @@
 
 Unit::Unit()
 {
+    for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {
+        time[i] = "00:00:00";
+    }
 }
 
-void Unit::setName(std::string _name)
+void Unit::setName(const std::string & _name)
 {
+    name = _name;
 }
 
-void Unit::setAgency(std::string _agency)
+void Unit::setAgency(const std::string & _agency)
 {
+    agency = _agency;
 }
 
-void Unit::setStation(std::string _station)
+void Unit::setStation(const std::string & _station)
 {
+    station = _station;
 }
 
-void Unit::setTime(unitStatus _idx, std::string _status)
+void Unit::setTime(unitStatus _idx, const std::string & _status)
 {
+    this->time[(unsigned int)_idx] = _status;
 }
 
-std::string Unit::getName()
+const std::string & Unit::getName()
 {
-    return std::string();
+    return name;
 }
 
-std::string Unit::getAgency()
+const std::string & Unit::getAgency()
 {
-    return std::string();
+    return agency;
 }
 
-std::string Unit::getStation()
+const std::string & Unit::getStation()
 {
-    return std::string();
+    return station;
 }
 
-std::string Unit::getTime(unitStatus _idx)
+const std::string & Unit::getTime(unitStatus _idx)
 {
-    return std::string();
+    return time[(unsigned int)_idx];
 }

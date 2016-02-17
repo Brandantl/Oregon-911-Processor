@@ -20,16 +20,16 @@ public:
     Unit();
 
     // Sets
-    void        setName(std::string _name);
-    void        setAgency(std::string _agency);
-    void        setStation(std::string _station);
-    void        setTime(unitStatus _idx, std::string _status);
+    void        setName(const std::string & _name);
+    void        setAgency(const std::string & _agency);
+    void        setStation(const std::string & _station);
+    void        setTime(unitStatus _idx, const std::string & _status);
 
     // Gets
-    std::string getName();
-    std::string getAgency();
-    std::string getStation();
-    std::string getTime(unitStatus _idx);
+    const std::string & getName();
+    const std::string & getAgency();
+    const std::string & getStation();
+    const std::string & getTime(unitStatus _idx);
 
 private:
     std::string name;
