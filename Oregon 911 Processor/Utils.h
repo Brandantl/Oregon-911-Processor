@@ -16,6 +16,23 @@ namespace util
             else if (knownAgencyList[i].abbv.empty()) stop = true;
             i++;
         }
+
+        // Last resort SLOW!
+        // We couldn't find this agency in the known agency lookup table.
+        // Lets check the stations list which has its own copy of stations.
+        i = 0;
+        stop = false;
+        if (ret.empty()) {
+            while (!stop) {
+                if (knownStationList[i].abbv == abbv) {
+                    ret = knownStationList[i].agency;
+                    stop = true;
+                }
+                else if (knownStationList[i].station.empty()) stop = true;
+                i++;
+            }
+        }
+
         return ret;
     }
 
