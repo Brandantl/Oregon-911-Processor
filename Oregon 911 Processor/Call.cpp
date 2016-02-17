@@ -1,17 +1,23 @@
+/*
+    Author: Brandan Tyler Lasley
+    Date:   2/16/2016
+*/
 #pragma once
 #include "Call.h"
 #include "Utils.h"
 
 
 Call::Call() {
-    callNumber = 0;
-    county = 0;
+    incidentInfo.callNumber = 0;
+    incidentInfo.county = 0;
+    incidentInfo.ignoreGC = 0;
+    location.lat = 0;
+    location.lon = 0;
     unitCount = 0;
     for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++) {
         time[i] = "00:00:00";
     }
     agency = "Unknown";
-    location.lat = location.lon = 0;
 }
 
 void Call::addUnit(Unit thing)
@@ -28,12 +34,9 @@ bool    Call::doesUnitExist(const std::string & name) {
 }
 
 // Sets
-void    Call::setCallNumber(int _callNumber) {
-    callNumber = _callNumber;
-}
-
-void    Call::setCounty(char _county) {
-    county = _county;
+void Call::setIncidentInfo(const IncidentHeader & _incidentInfo)
+{
+    incidentInfo = _incidentInfo;
 }
 
 void    Call::setTime(callTime _idx, const std::string & _status) {
@@ -76,12 +79,10 @@ void Call::setAddress(const std::string & _address)
 }
 
 // Gets
-int    Call::getCallNumber() {
-    return callNumber;
-}
 
-char    Call::getCounty() {
-    return county;
+const IncidentHeader & Call::getIncidentInfo()
+{
+    return incidentInfo;
 }
 
 const std::string &    Call::getTime(callTime _idx) {

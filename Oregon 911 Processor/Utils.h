@@ -1,9 +1,13 @@
+/*
+    Author: Brandan Tyler Lasley
+    Date:   2/16/2016
+*/
 #pragma once
 #include "data.h"
 
 namespace util
 {
-    // Cycles though all of knownAgencyList until it finds what it wants or return a empty string.
+    // Cycles though all of knownAgencyList until it finds what it wants or returns an empty string.
     inline std::string getAgencyByStation(const std::string & abbv) {
         std::string ret = "UNK";
         bool stop = false;
@@ -36,7 +40,7 @@ namespace util
         return ret;
     }
 
-    // Cycles though all of knownAgencyList until it finds what it wants or return a empty string.
+    // Cycles though all of knownUnitList until it finds what it wants or returns an empty string.
     inline std::string getAgencyByUnitName(const std::string & name, const char & county) {
         std::string ret = "UNK";
         bool stop = false;

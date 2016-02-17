@@ -16,12 +16,6 @@ using namespace std;
 int main() {
     cout << "Oregon 911 Importer! \n";
 
-    Call thing;
-    Unit thing2;
-
-    thing.setStation("ALO");
-    thing2.setName("E62", 'W');
-    thing.addUnit(thing2);
 
     cin.get();
     cin.get();

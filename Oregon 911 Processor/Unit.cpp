@@ -1,3 +1,7 @@
+/*
+    Author: Brandan Tyler Lasley
+    Date:   2/16/2016
+*/
 #include "Unit.h"
 #include "Utils.h"
 Unit::Unit()

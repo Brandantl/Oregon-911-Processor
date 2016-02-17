@@ -1,5 +1,16 @@
+/*
+    Author: Brandan Tyler Lasley
+    Date:   2/16/2016
+    Purpose: Holds all structs in the entire program.
+*/
 #pragma once
 #include <string>
+
+struct IncidentHeader {
+    int callNumber;
+    char county;
+    bool ignoreGC;
+};
 
 struct agencyList {
     std::string abbv;

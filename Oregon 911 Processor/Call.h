@@ -1,7 +1,7 @@
 /*
-Author: Brandan Tyler Lasley
-Date:   2/12/2016
-Purpose: To store data for an individual incident.
+    Author: Brandan Tyler Lasley
+    Date:   2/12/2016
+    Purpose: To store data for an individual incident.
 */
 #pragma once
 #include <vector>
@@ -33,8 +33,7 @@ public:
     bool                                                doesUnitExist(const std::string & name);
 
     // Sets
-    void                                                setCallNumber(int _callNumber);
-    void                                                setCounty(char _county);
+    void                                                setIncidentInfo(const IncidentHeader& _incidentInfo);
     void                                                setTime(callTime _idx, const std::string & _status);
     void                                                setCallSummery(const std::string & _callSummery);
     void                                                setStation(const std::string & _station);
@@ -43,8 +42,7 @@ public:
     void                                                setAddress(const std::string & _address);
 
     // Gets
-    int                                                 getCallNumber();
-    char                                                getCounty();
+    const IncidentHeader&                               getIncidentInfo();
     const std::string &                                 getTime(callTime _idx);
     const std::string &                                 getCallSummery();
     const std::string &                                 getStation();
@@ -65,8 +63,7 @@ public:
     const struct gps    *                               ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f);
 
 private:
-    int                                                 callNumber;
-    char                                                county;
+    IncidentHeader                                      incidentInfo;
     std::string                                         time[MAX_NUM_CALL_STATUSES]; // 4 is the number of statuses. See callTime enum.
     std::string                                         callSummery;
     std::string                                         address;
