@@ -6,6 +6,13 @@ struct agencyList {
     std::string name;
 };
 
+struct callSummeryEventList {
+    std::string callSummery;
+    std::string Responce;
+    std::string EventID;
+    std::string Icon;
+};
+
 struct gps {
     double lat;
     double lon;

@@ -16,7 +16,7 @@ using namespace std;
 int main() {
     cout << "Oregon 911 Importer! \n";
 
-
+    Call thing;
 
 
 

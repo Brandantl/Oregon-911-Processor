@@ -1,4 +1,6 @@
 #pragma once
 #include "structs.h"
 
-extern struct agencyList knownAgencyList[];
+extern const struct agencyList knownAgencyList[];
+extern const std::string knownCallFeilds[];
+extern const callSummeryEventList knownCallSummeryEvents[];

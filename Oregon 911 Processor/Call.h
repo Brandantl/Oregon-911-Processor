@@ -24,63 +24,64 @@ public:
     Call();
 
     // Add
-    void                            addUnit(Unit thing);
+    void                                                addUnit(Unit thing);
 
     // Remove
-    void                            removeUnit(const std::string & name);
+    void                                                removeUnit(const std::string & name);
 
     // Exits
-    bool                            doesUnitExist(const std::string & name);
+    bool                                                doesUnitExist(const std::string & name);
 
     // Sets
-    void                            setCallNumber(int _callNumber);
-    void                            setCounty(char _county);
-    void                            setTime(callTime _idx, const std::string & _status);
-    void                            setCallSummery(const std::string & _callSummery);
-    void                            setAgency(const std::string & _agency);
-    //void                          setAgencyName(const std::string & _agencyName);
-    void                            setLocation(const struct gps & _location);
-    void                            setAddress(const std::string & _address);
+    void                                                setCallNumber(int _callNumber);
+    void                                                setCounty(char _county);
+    void                                                setTime(callTime _idx, const std::string & _status);
+    void                                                setCallSummery(const std::string & _callSummery);
+    void                                                setAgency(const std::string & _agency);
+    //void                                              setAgencyName(const std::string & _agencyName);
+    void                                                setLocation(const struct gps & _location);
+    void                                                setAddress(const std::string & _address);
 
     // Gets
-    int                             getCallNumber();
-    char                            getCounty();
-    const std::string &             getTime(callTime _idx);
-    const std::string &             getCallSummery();
-    const std::string &             getAgency();
-    const std::string &             getAgencyName();
-    struct gps                      getLocation();
-    int                             getUnitcount();
-    std::string                     getUnitsString();
-    const std::string &             setAddress();
+    int                                                 getCallNumber();
+    char                                                getCounty();
+    const std::string &                                 getTime(callTime _idx);
+    const std::string &                                 getCallSummery();
+    const std::string &                                 getAgency();
+    const std::string &                                 getAgencyName();
+    struct gps                                          getLocation();
+    int                                                 getUnitcount();
+    std::string                                         getUnitsString();
+    const std::string &                                 setAddress();
 
-    void                            clearCallSummeryHistory();
-    void                            clearAddressHistory();
-    void                            clearLocationHistory();
+    void                                                clearCallSummeryHistory();
+    void                                                clearAddressHistory();
+    void                                                clearLocationHistory();
 
     // Processes/Loops
-    const class Unit    *           ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f);
-    const std::string   *           ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f);
-    const std::string   *           ProcessAddressHistory(const std::function<bool(const std::string & history)> & f);
-    const struct gps    *           ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f);
+    const class Unit    *                               ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f);
+    const std::string   *                               ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f);
+    const std::string   *                               ProcessAddressHistory(const std::function<bool(const std::string & history)> & f);
+    const struct gps    *                               ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f);
 
 private:
-    int                             callNumber;
-    char                            county;
-    std::string                     time[MAX_NUM_CALL_STATUSES]; // 4 is the number of statuses. See callTime enum.
-    std::string                     callSummery;
-    std::string                     address;
-    std::string                     agency;
-    std::string                     agencyName;
-    int                             unitCount;
-    std::string                     station;
-    std::string                     units;
-    struct gps                      location;
+    int                                                 callNumber;
+    char                                                county;
+    std::string                                         time[MAX_NUM_CALL_STATUSES]; // 4 is the number of statuses. See callTime enum.
+    std::string                                         callSummery;
+    std::string                                         address;
+    std::string                                         agency;
+    std::string                                         agencyName;
+    int                                                 unitCount;
+    std::string                                         station;
+    std::string                                         units;
+    struct gps                                          location;
+    std::vector<std::string>                            Flags; // TODO
 
-    std::unordered_map<std::string, class Unit>        unitList;
+    std::unordered_map<std::string, class Unit>         unitList;
 
     // These operate more like stacks storing data until it's dumped into the database.
-    std::vector<std::string>        callSummeryHistory;
-    std::vector<std::string>        addressHistory;
-    std::vector<struct gps>         locationHistory;
+    std::vector<std::string>                            callSummeryHistory;
+    std::vector<std::string>                            addressHistory;
+    std::vector<struct gps>                             locationHistory;
 };
