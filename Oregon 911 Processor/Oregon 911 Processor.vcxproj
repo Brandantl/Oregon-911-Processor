@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="Call.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="Incidents.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>

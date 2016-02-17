@@ -10,6 +10,9 @@ struct IncidentHeader {
     int callNumber;
     char county;
     bool ignoreGC;
+    bool operator<(const IncidentHeader & n) const {
+        return this->callNumber < n.callNumber && this->county < n.county;   // for example
+    }
 };
 
 struct agencyList {

@@ -6,7 +6,10 @@
 #pragma once
 #include <unordered_map>
 #include <functional>
+#include "structs.h"
+#include <utility>
 #include <vector>
+#include "Call.h"
 
 class Incidents {
 public:
@@ -23,6 +26,6 @@ public:
     const class Call    *                                       ProcessCallList(const std::function<bool(const class Call & _call)> & f);
 
 private:
-    std::vector<struct IncidentHeader> lastImport;                                          // callNumber, County
-    std::unordered_map<struct IncidentHeader, class Call>         callList;
+    std::vector<struct IncidentHeader>                          lastImport;                 // callNumber, County
+    std::unordered_map<int, Call>		                        callList;                   // Key is the call number
 };
