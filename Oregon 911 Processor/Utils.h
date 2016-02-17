@@ -5,7 +5,7 @@ namespace util
 {
 
     inline std::string getAgencyByAbbv(const std::string & abbv) {
-        std::string ret;
+        std::string ret = "UNK";
         bool stop = false;
         int i = 0;
         while (!stop) {
