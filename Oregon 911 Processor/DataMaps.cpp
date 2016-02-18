@@ -9,6 +9,7 @@
 class DataMaps * DataCache;
 
 DataMaps::DataMaps() {
+    // Adds data from data.h to the maps by reference so no memory is copied.
     for (int i = 0; !knownStationList[i].abbv.empty(); i++) {
         mapStationList[knownStationList[i].abbv] = &knownStationList[i];
     }

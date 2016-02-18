@@ -39,21 +39,4 @@ namespace util
 
         return ret;
     }
-
-    // Cycles though all of knownUnitList until it finds what it wants or returns an empty string.
-    inline std::string getAgencyByUnitName(const std::string & name, const char & county) {
-        std::string ret = "UNK";
-        bool stop = false;
-        int i = 0;
-        while (!stop) {
-            if (knownUnitList[i].name == name && knownUnitList[i].county == county) {
-                ret = knownUnitList[i].agency;
-                stop = true;
-            }
-            else if (knownUnitList[i].name.empty()) stop = true;
-            i++;
-        }
-        return ret;
-    }
-
 }
