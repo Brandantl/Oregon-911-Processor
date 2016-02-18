@@ -8,12 +8,13 @@
 #include "Unit.h"
 #include "Call.h"
 #include "Utils.h"
-
+#include "DataMaps.h"
 #include <iostream>
 
 using namespace std;
 
 int main() {
+    DataCache = new DataMaps();
     cout << "Oregon 911 Importer! \n";
 
     Call thing;

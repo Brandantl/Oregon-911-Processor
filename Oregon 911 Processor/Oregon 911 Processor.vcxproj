@@ -116,6 +116,7 @@
   <ItemGroup>
     <ClInclude Include="Call.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="DataMaps.h" />
     <ClInclude Include="Incidents.h" />
     <ClInclude Include="or911.h" />
     <ClInclude Include="structs.h" />
@@ -125,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="Call.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="DataMaps.cpp" />
     <ClCompile Include="Incidents.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Unit.cpp" />

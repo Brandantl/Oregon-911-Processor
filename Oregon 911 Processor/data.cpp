@@ -1,6 +1,6 @@
 #include "data.h"
 
-const stationInfoList knownStationList[]{
+const stationInfoList knownStationList[] {
     "50", 'W', "WAL", "TUALATIN VALLEY FIRE & RESCUE",
     "214", 'C', "MAF", "LAKE OSWEGO F&R&LIFE SAFETY",
     "11", 'W', "GAF", "GASTON RFPD",
