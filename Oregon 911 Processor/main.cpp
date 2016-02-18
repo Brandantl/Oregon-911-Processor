@@ -23,7 +23,7 @@ int main() {
 
     thing.setStation("ALO");
     thing2.setName("E62", 'W');
-    thing.addUnit(thing2);
+    thing.addOrUpdateUnit(thing2);
 
     const Unit* x = thing.ProcessUnitList([](const Unit & t) { return false; });
 
