@@ -22,10 +22,9 @@ class Call {
 
 public:
     Call();
-    Call(const Call &obj);
 
     // Add
-    void                                                addUnit(const Unit & thing);
+    void                                                addOrUpdateUnit(const Unit & thing);
 
     // Remove
     void                                                removeUnit(const std::string & name);
@@ -33,6 +32,9 @@ public:
     // Exits
     bool                                                doesUnitExist(const std::string & name);
     bool                                                doesFlagExist(const std::string & _flag);
+
+    void updateCall(const Call &obj);
+
 
     // Sets
     void                                                setIncidentInfo(const IncidentHeader& _incidentInfo);
@@ -65,10 +67,6 @@ public:
     const std::string   *                               ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f);
     const std::string   *                               ProcessAddressHistory(const std::function<bool(const std::string & history)> & f);
     const struct gps    *                               ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f);
-
-    // Operators
-    Call & operator=(const Call &obj);
-
 private:
     IncidentHeader                                      incidentInfo;
     std::string                                         time[MAX_NUM_CALL_STATUSES]; // 4 is the number of statuses. See callTime enum.

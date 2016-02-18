@@ -20,24 +20,14 @@ Call::Call() {
     agency = "Unknown";
 }
 
-Call::Call(const Call & obj)
+void Call::addOrUpdateUnit(const Unit & thing)
 {
-    incidentInfo.callNumber = 0;
-    incidentInfo.county = 0;
-    incidentInfo.ignoreGC = 0;
-    location.lat = 0;
-    location.lon = 0;
-    unitCount = 0;
-    for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++) {
-        time[i] = "00:00:00";
+    if (doesUnitExist(thing.getName())) {
+        unitList[thing.getName()].updateUnit(thing);
     }
-    agency = "Unknown";
-    this->operator=(obj);
-}
-
-void Call::addUnit(const Unit & thing)
-{
-    unitList[thing.getName()] = thing;
+    else {
+        unitList[thing.getName()] = thing;
+    }
 }
 
 void    Call::removeUnit(const std::string & name) {
@@ -51,6 +41,15 @@ bool    Call::doesUnitExist(const std::string & name) {
 bool Call::doesFlagExist(const std::string & _flag)
 {
     return (Flags.count(_flag)>0);
+}
+
+void Call::updateCall(const Call & obj)
+{
+    this->setAddress(obj.address);
+    this->setLocation(obj.location);
+    this->setCallSummery(obj.callSummery);
+    for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++)
+        this->time[i] = obj.time[i];
 }
 
 // Sets
@@ -215,13 +214,4 @@ const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(c
         }
     }
     return nullptr;
-}
-
-Call & Call::operator=(const Call &obj) {
-    this->setAddress(obj.address);
-    this->setLocation(obj.location);
-    this->setCallSummery(obj.callSummery);
-    for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++)
-        this->time[i] = obj.time[i];
-    return *this;
 }

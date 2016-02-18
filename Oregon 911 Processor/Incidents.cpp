@@ -13,8 +13,7 @@ void Incidents::addOrUpdateIncident(Call & _call)
 {
     const IncidentHeader & callHead = _call.getIncidentInfo();
     if (doesIncidentExist(_call)) {
-        Call * oldCall = &callList[callHead.callNumber][callHead.county];
-        *oldCall = _call; 
+        callList[callHead.callNumber][callHead.county].updateCall(_call);
     }
     else {
         callList[callHead.callNumber][callHead.county] = _call;
