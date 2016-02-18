@@ -12,6 +12,13 @@ class DataMaps {
 public:
     DataMaps();
 
+    const struct stationInfoList *                                      getStationInfo(std::string key);
+    const struct unitInfoList *                                         getUnitInfo(std::string key);
+    const struct agencyList *                                           getAgencyInfo(std::string key);
+    const struct callSummeryEventList *                                 getCallSummeryEventsInfo(std::string key);
+    const struct callSummeryEventList *                                 getFeildsEventsInfo(std::string key);
+    const std::string *                                                 getCallFeild(std::string key);
+
 private:
     std::map<std::string, const struct stationInfoList *>		        mapStationList;
     std::map<std::string, const struct unitInfoList *>		            mapUnitList;

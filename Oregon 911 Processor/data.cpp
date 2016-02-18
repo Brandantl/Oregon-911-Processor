@@ -522,7 +522,6 @@ const callSummeryEventList knownCallSummeryEvents[]{
     "HIGH ANGLE RESQ", "Rope rescue at", "ROPERESQ", "avalance.png",
     "TECHNICAL RESCUE", "Rope/Technical rescue at", "ROPERESQ", "avalance.png",
     "INDUSTRIAL ACCID", "Industrial Accident at", "INDUSTACC", "Hazmat.png",
-    "Entrapment", "Major MVA/Other w/ possible entrapment at", "MMVA", "caraccident.png",
     "BOMB THREAT", "Bomb threat at", "BOMB", "bomb.png",
     "MARINE INCIDENT", "Marine Rescue investigation at", "MR1", "boat.png",
     "MR2", "Marine Rescue (LVL 2) at", "MR2", "boat.png",
@@ -530,6 +529,7 @@ const callSummeryEventList knownCallSummeryEvents[]{
     "TAI-HIGH MECHANI", "Major MVA/Other w/ possible entrapment at", "MMVA", "caraccident.png",
     "MECH ENTRAPMENT", "Major MVA/Other w/ possible entrapment at", "MMVA", "caraccident.png",
     "EMTRAPMENT", "Major MVA/Other w/ possible entrapment at", "MMVA", "caraccident.png",
+    "ENTRAPMENT", "Major MVA/Other w/ possible entrapment at", "MMVA", "caraccident.png",
     "SHOTS", "Shots fired/shooting at", "SHOOTING", "crimescene.png",
     "FIRED", "Shots fired/shooting at", "SHOOTING", "crimescene.png",
     "GUN", "Shots fired/shooting at", "SHOOTING", "crimescene.png",
@@ -550,7 +550,7 @@ const callSummeryEventList knownCallSummeryEvents[]{
     "CAVE IN RESCUE", "Cave in rescue at ", "CAVER", "avalance.png",
     "CONFINED ENTRAPM", "Confined entrapment at ", "CENT", "avalance.png",
     "TAI-MAJOR INCIDE", "Major traffic accident at ", "MMVA", "caraccident.png",
-    "2nd Alarm Trauma", "Second Alarm Medical at", "2ALMM", "fire.png",
+    "2ND ALARM TRAUMA", "Second Alarm Medical at", "2ALMM", "fire.png",
     "","","",""                                       // End, do not remove.
 };
 
