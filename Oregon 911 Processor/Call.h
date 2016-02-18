@@ -22,6 +22,7 @@ class Call {
 
 public:
     Call();
+    Call(const Call &obj);
 
     // Add
     void                                                addUnit(const Unit & thing);
@@ -31,6 +32,7 @@ public:
 
     // Exits
     bool                                                doesUnitExist(const std::string & name);
+    bool                                                doesFlagExist(const std::string & _flag);
 
     // Sets
     void                                                setIncidentInfo(const IncidentHeader& _incidentInfo);
@@ -40,6 +42,7 @@ public:
     //void                                              setAgency(const std::string & _agencyName); // This should be set automatically.
     void                                                setLocation(const struct gps & _location);
     void                                                setAddress(const std::string & _address);
+    void                                                addFlag(const struct callSummeryEventList & _flag);
 
     // Gets
     const IncidentHeader&                               getIncidentInfo() const;
@@ -50,7 +53,8 @@ public:
     struct gps                                          getLocation() const;
     int                                                 getUnitcount() const;
     std::string                                         getUnitsString() const;
-    const std::string &                                 setAddress() const;
+    const std::string &                                 getAddress() const;
+    std::string                                         getFlagsString() const;
 
     void                                                clearCallSummeryHistory();
     void                                                clearAddressHistory();
@@ -61,6 +65,9 @@ public:
     const std::string   *                               ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f);
     const std::string   *                               ProcessAddressHistory(const std::function<bool(const std::string & history)> & f);
     const struct gps    *                               ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f);
+
+    // Operators
+    Call & operator=(const Call &obj);
 
 private:
     IncidentHeader                                      incidentInfo;
@@ -73,7 +80,7 @@ private:
     std::string                                         units;
     struct gps                                          location;
     std::unordered_map<std::string, 
-    struct callSummeryEventList>                        Flags; // Todo, also I didn't want to resize the whole file to fit that long name.
+    struct callSummeryEventList>                        Flags; //I didn't want to resize the whole file to fit that long name.
 
     std::unordered_map<std::string, class Unit>         unitList;
 

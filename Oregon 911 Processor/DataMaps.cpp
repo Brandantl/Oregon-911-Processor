@@ -33,42 +33,42 @@ DataMaps::DataMaps() {
     }
 }
 
-const stationInfoList * DataMaps::getStationInfo(std::string key)
+const stationInfoList * DataMaps::getStationInfo(const std::string & key)
 {
     if (mapStationList.count(key))
         return mapStationList[key];
     return nullptr;
 }
 
-const unitInfoList * DataMaps::getUnitInfo(std::string key)
+const unitInfoList * DataMaps::getUnitInfo(const std::string & key)
 {
     if (mapUnitList.count(key))
         return mapUnitList[key];
     return nullptr;
 }
 
-const agencyList * DataMaps::getAgencyInfo(std::string key)
+const agencyList * DataMaps::getAgencyInfo(const std::string & key)
 {
     if (mapAgencyList.count(key))
         return mapAgencyList[key];
     return nullptr;
 }
 
-const callSummeryEventList * DataMaps::getCallSummeryEventsInfo(std::string key)
+const callSummeryEventList * DataMaps::getCallSummeryEventsInfo(const std::string & key)
 {
     if (mapCallSummeryEvents.count(key))
         return mapCallSummeryEvents[key];
     return nullptr;
 }
 
-const callSummeryEventList * DataMaps::getFeildsEventsInfo(std::string key)
+const callSummeryEventList * DataMaps::getFeildsEventsInfo(const std::string & key)
 {
     if (mapFeildsEvents.count(key))
         return mapFeildsEvents[key];
     return nullptr;
 }
 
-const std::string * DataMaps::getCallFeild(std::string key)
+const std::string * DataMaps::getCallFeild(const std::string & key)
 {
     if (mapCallFeilds.count(key))
         return mapCallFeilds[key];

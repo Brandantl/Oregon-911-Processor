@@ -20,6 +20,21 @@ Call::Call() {
     agency = "Unknown";
 }
 
+Call::Call(const Call & obj)
+{
+    incidentInfo.callNumber = 0;
+    incidentInfo.county = 0;
+    incidentInfo.ignoreGC = 0;
+    location.lat = 0;
+    location.lon = 0;
+    unitCount = 0;
+    for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++) {
+        time[i] = "00:00:00";
+    }
+    agency = "Unknown";
+    this->operator=(obj);
+}
+
 void Call::addUnit(const Unit & thing)
 {
     unitList[thing.getName()] = thing;
@@ -31,6 +46,11 @@ void    Call::removeUnit(const std::string & name) {
 
 bool    Call::doesUnitExist(const std::string & name) {
     return (unitList.count(name)>0);
+}
+
+bool Call::doesFlagExist(const std::string & _flag)
+{
+    return (Flags.count(_flag)>0);
 }
 
 // Sets
@@ -78,6 +98,11 @@ void Call::setAddress(const std::string & _address)
     address = _address;
 }
 
+void Call::addFlag(const struct callSummeryEventList & _flag)
+{
+    Flags[_flag.EventID] = _flag;
+}
+
 // Gets
 
 const IncidentHeader & Call::getIncidentInfo() const
@@ -121,9 +146,19 @@ std::string    Call::getUnitsString() const {
     return ret_str;
 }
 
-const std::string & Call::setAddress() const
+const std::string & Call::getAddress() const
 {
     return address;
+}
+
+std::string Call::getFlagsString() const
+{
+    std::string ret_str;
+    for (auto it : Flags) {
+        ret_str += it.second.EventID;
+        ret_str += ";";
+    }
+    return ret_str;
 }
 
 void Call::clearCallSummeryHistory()
@@ -180,4 +215,13 @@ const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(c
         }
     }
     return nullptr;
+}
+
+Call & Call::operator=(const Call &obj) {
+    this->setAddress(obj.address);
+    this->setLocation(obj.location);
+    this->setCallSummery(obj.callSummery);
+    for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++)
+        this->time[i] = obj.time[i];
+    return *this;
 }

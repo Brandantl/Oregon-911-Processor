@@ -18,6 +18,7 @@ enum class unitStatus {
 class Unit {
 public:
     Unit();
+    Unit(const Unit &obj);
 
     // Sets
     void        setName(const std::string & _name, const char & county);
@@ -31,6 +32,8 @@ public:
     const std::string & getStation() const;
     const std::string & getTime(unitStatus _idx) const;
 
+    // Operators
+    Unit & operator=(const Unit &obj);
 private:
     std::string name;
     std::string agency;

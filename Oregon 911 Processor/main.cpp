@@ -15,6 +15,7 @@ using namespace std;
 
 int main() {
     DataCache = new DataMaps();
+
     cout << "Oregon 911 Importer! \n";
 
     Call thing;
@@ -28,5 +29,7 @@ int main() {
 
     cin.get();
     cin.get();
+
+    delete DataCache;
     return 0;
 }

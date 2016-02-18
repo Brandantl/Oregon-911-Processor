@@ -14,7 +14,7 @@ void Incidents::addOrUpdateIncident(Call & _call)
     const IncidentHeader & callHead = _call.getIncidentInfo();
     if (doesIncidentExist(_call)) {
         Call * oldCall = &callList[callHead.callNumber][callHead.county];
-        *oldCall = _call; // Todo override Calls equal operator! We don't really want to deep copy!!!
+        *oldCall = _call; 
     }
     else {
         callList[callHead.callNumber][callHead.county] = _call;

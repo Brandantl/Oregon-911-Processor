@@ -12,6 +12,13 @@ Unit::Unit()
     }
 }
 
+Unit::Unit(const Unit &obj) {
+    for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {
+        time[i] = "00:00:00";
+    }
+    this->operator=(obj);
+}
+
 void Unit::setName(const std::string & _name, const char & county)
 {
     name = _name;
@@ -51,4 +58,14 @@ const std::string & Unit::getStation() const
 const std::string & Unit::getTime(unitStatus _idx) const
 {
     return time[(unsigned int)_idx];
+}
+
+Unit & Unit::operator=(const Unit & obj)
+{
+    for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {
+        if (obj.time[i] != "00:00:00") {
+            time[i] = obj.time[i];
+        }
+    }
+    return *this;
 }
