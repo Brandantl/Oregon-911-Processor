@@ -75,10 +75,14 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\Foundation\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\Net\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\JSON\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\XML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -94,10 +98,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\Foundation\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\Net\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\JSON\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\XML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

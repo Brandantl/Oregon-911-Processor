@@ -1,0 +1,30 @@
+﻿  AbstractConfigurationTest.cpp
+  ConfigurationMapperTest.cpp
+  ConfigurationTestSuite.cpp
+  ConfigurationViewTest.cpp
+  Driver.cpp
+  FilesystemConfigurationTest.cpp
+  HelpFormatterTest.cpp
+  IniFileConfigurationTest.cpp
+  JSONConfigurationTest.cpp
+  LayeredConfigurationTest.cpp
+  LoggingConfiguratorTest.cpp
+  MapConfigurationTest.cpp
+  OptionProcessorTest.cpp
+  OptionSetTest.cpp
+  OptionsTestSuite.cpp
+  OptionTest.cpp
+  PropertyFileConfigurationTest.cpp
+  SystemConfigurationTest.cpp
+  TimerTest.cpp
+  TimerTestSuite.cpp
+  Generating Code...
+  Compiling...
+  UtilTestSuite.cpp
+  ValidatorTest.cpp
+  WinConfigurationTest.cpp
+  WindowsTestSuite.cpp
+  WinRegistryTest.cpp
+  XMLConfigurationTest.cpp
+  Generating Code...
+  TestSuite_vs140.vcxproj -> G:\Users\Brandan\Documents\Pop3\Source\Library8\poco-1.6.1\Util\testsuite\bin\TestSuite.exe

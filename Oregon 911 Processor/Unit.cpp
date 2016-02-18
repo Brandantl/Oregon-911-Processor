@@ -5,6 +5,7 @@
 #include "Unit.h"
 #include "Utils.h"
 #include "DataMaps.h"
+
 Unit::Unit()
 {
     for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {

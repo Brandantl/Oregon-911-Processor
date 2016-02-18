@@ -1,0 +1,25 @@
+﻿  AttributesImplTest.cpp
+  ChildNodesTest.cpp
+  DocumentTest.cpp
+  DocumentTypeTest.cpp
+  DOMTestSuite.cpp
+  Driver.cpp
+  ElementTest.cpp
+  EventTest.cpp
+  NamePoolTest.cpp
+  NamespaceSupportTest.cpp
+  NameTest.cpp
+  NodeAppenderTest.cpp
+  NodeIteratorTest.cpp
+  NodeTest.cpp
+  ParserWriterTest.cpp
+  SAXParserTest.cpp
+  SAXTestSuite.cpp
+  TextTest.cpp
+  TreeWalkerTest.cpp
+  XMLTestSuite.cpp
+  Generating Code...
+  Compiling...
+  XMLWriterTest.cpp
+  Generating Code...
+  TestSuite_vs140.vcxproj -> G:\Users\Brandan\Documents\Pop3\Source\Library8\poco-1.6.1\XML\testsuite\bin\TestSuite.exe

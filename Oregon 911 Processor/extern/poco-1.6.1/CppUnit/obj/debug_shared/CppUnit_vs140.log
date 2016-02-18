@@ -1,0 +1,11 @@
+﻿  CppUnitException.cpp
+  TestCase.cpp
+  TestDecorator.cpp
+  TestFailure.cpp
+  TestResult.cpp
+  TestRunner.cpp
+  TestSuite.cpp
+  TextTestResult.cpp
+  Generating Code...
+     Creating library ..\lib\CppUnitd.lib and object ..\lib\CppUnitd.exp
+  CppUnit_vs140.vcxproj -> G:\Users\Brandan\Documents\Pop3\Source\Library8\poco-1.6.1\CppUnit\..\bin\CppUnitd.dll

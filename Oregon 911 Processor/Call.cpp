@@ -6,7 +6,6 @@
 #include "Call.h"
 #include "Utils.h"
 
-
 Call::Call() {
     incidentInfo.callNumber = 0;
     incidentInfo.county = 0;
