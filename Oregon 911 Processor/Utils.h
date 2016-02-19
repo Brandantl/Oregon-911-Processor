@@ -50,7 +50,7 @@ namespace util
         return ret;
     }
 
-    inline std::string http_get(const std::string & url, const std::string & data) {
+    inline std::string http_get(const std::string & url, const std::string & data = "") {
         std::string content;
         try {
             // Initialize session
