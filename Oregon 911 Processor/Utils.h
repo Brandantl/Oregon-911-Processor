@@ -7,15 +7,17 @@
 #include <string>
 #include <iterator>
 #include <sstream>
+#include <vector>
 
-#include <Poco/Exception.h>
-#include <Poco/StreamCopier.h>
 #include <Poco/Net/HTTPClientSession.h>
-#include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPResponse.h>
+#include <Poco/StringTokenizer.h>
+#include <Poco/Net/HTTPRequest.h>
+#include <Poco/StreamCopier.h>
+#include <Poco/Exception.h>
+#include <Poco/String.h>
 #include <Poco/Path.h>
 #include <Poco/URI.h>
-
 namespace util
 {
     // Cycles though all of knownAgencyList until it finds what it wants or returns an empty string.
@@ -99,4 +101,72 @@ namespace util
         return content;
     }
 
+    inline char getCountyByName(const std::string & county) {
+
+        if (Poco::toLower(county) == "wccca") {
+            return 'W';
+        }
+        else if (Poco::toLower(county) == "ccom") {
+            return 'C';
+        }
+        return 0;
+    }
+
+    inline std::vector<struct WCCCA_JSON> getWCCCAGPSFromHTML(const std::string & WCCCA_HTML) {
+        std::vector<struct WCCCA_JSON> WCCCA_GPS_DATA;
+
+        // Find GPS Location
+        size_t location_start = WCCCA_HTML.rfind("<script type=\"text/javascript\">");
+        size_t location_end = WCCCA_HTML.rfind("</script>");
+        std::string gps_code = WCCCA_HTML.substr(location_start, location_end - location_start);
+
+        // Reduce further
+        location_start = gps_code.find("LoadMarker");
+        gps_code = gps_code.substr(location_start, gps_code.length());
+        gps_code = gps_code.substr(0, gps_code.find("\n", 0));
+
+        // Ok we reduced enough, lets split the string by ;
+        Poco::StringTokenizer rows(gps_code, ";");
+
+        for (int i = 0; i < rows.count(); i++) {
+            if (0 == rows[i].find("LoadMarker")) {
+                // Ok now on this CPU intensive journey we need to remove "LoadMarker(" and the last ")".
+                std::string row = rows[i];
+
+                // "LoadMarker(" is 11 characters long with the -1 for the ")" at the end.
+                const int lengthOfLoadMarker = 11;
+                row = row.substr(lengthOfLoadMarker, row.length() - lengthOfLoadMarker - 1);
+
+                // Strip
+                row.erase(std::remove(row.begin(), row.end(), '\''), row.end());
+                row.erase(std::remove(row.begin(), row.end(), ')'), row.end());
+
+                // We need to split it now by commads.
+                Poco::StringTokenizer columns(row, ",");
+
+                const int lengthOfparseFloat = 11;
+                std::string lat = columns[0].substr(lengthOfparseFloat, columns[0].length());
+                std::string lon = columns[1].substr(lengthOfparseFloat, columns[1].length());
+                std::string callNumber = columns[3].substr(1, columns[3].length());
+                std::string county = columns[4].substr(1, columns[3].length());
+
+                struct WCCCA_JSON gpsData;
+
+                // Header
+                gpsData.h.callNumber = stoi(callNumber);
+                gpsData.h.county = util::getCountyByName(county);
+                gpsData.h.ignoreGC = false;
+
+                // Location
+                gpsData.location.lat = stod(lat);
+                gpsData.location.lon = stod(lon);
+
+                // misc
+                gpsData.callSum = Poco::toUpper(columns[2].substr(1, columns[2].length()));
+
+                WCCCA_GPS_DATA.push_back(gpsData);
+            }
+        }
+        return WCCCA_GPS_DATA;
+    }
 }

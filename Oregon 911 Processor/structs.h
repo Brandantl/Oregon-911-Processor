@@ -6,6 +6,24 @@
 #pragma once
 #include <string>
 
+struct gps {
+    double lat;
+    double lon;
+
+    bool isInit() {
+        if (lat > 0 && lon > 0)
+            return true;
+        return false;
+    }
+    bool operator== (const gps & loc1) {
+        return (lat == loc1.lat && lon == loc1.lon);
+    }
+    bool operator!= (const gps & loc1) {
+        return (!this->operator==(loc1));
+    }
+};
+
+
 struct IncidentHeader {
     int callNumber;
     char county;
@@ -13,6 +31,12 @@ struct IncidentHeader {
     bool operator<(const IncidentHeader & n) const {
         return this->callNumber < n.callNumber && this->county < n.county; 
     }
+};
+
+struct WCCCA_JSON {
+    struct IncidentHeader h;
+    struct gps location;
+    std::string callSum;
 };
 
 struct agencyList {
@@ -40,21 +64,4 @@ struct stationInfoList {
     char county;
     std::string abbv;
     std::string agency;
-};
-
-struct gps {
-    double lat;
-    double lon;
-
-    bool isInit() {
-        if (lat > 0 && lon > 0)
-            return true;
-        return false;
-    }
-    bool operator== (const gps & loc1) {
-        return (lat == loc1.lat && lon == loc1.lon);
-    }
-    bool operator!= (const gps & loc1) {
-        return (!this->operator==(loc1));
-    }
 };

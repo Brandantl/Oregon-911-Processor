@@ -10,6 +10,7 @@
 #include "Utils.h"
 #include "DataMaps.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
@@ -17,7 +18,11 @@ int main() {
 
     cout << "Oregon 911 Importer! \n\n";
 
-    cout << GET_WCCCA_DATA;
+    const std::string WCCCA_STR  = GET_WCCCA_DATA();
+
+    vector<struct WCCCA_JSON> gpsData = util::getWCCCAGPSFromHTML(WCCCA_STR);
+
+
 
     delete DataCache;
     return 0;
