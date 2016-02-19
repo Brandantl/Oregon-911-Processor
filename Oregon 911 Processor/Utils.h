@@ -56,7 +56,6 @@ namespace util
             // Initialize session
             Poco::URI uri(url);
             Poco::Net::HTTPClientSession client_session(uri.getHost(), uri.getPort());
-            client_session.setKeepAlive(true);
 
             // Prepare and send request
             std::string path(uri.getPathAndQuery());
@@ -66,6 +65,8 @@ namespace util
             if (!data.empty()) {
                 // Nevermind we want to post.
                 req.setMethod(Poco::Net::HTTPRequest::HTTP_POST);
+
+                client_session.setKeepAlive(true);
 
                 // Set Expect 100 continue
                 req.set("Expect", "100-continue");
