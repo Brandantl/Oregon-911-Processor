@@ -114,9 +114,15 @@ namespace util
     }
 
     inline bool isWCCCAHTMLValid(const std::string & WCCCA_HTML) {
-        if (WCCCA_HTML.empty() || WCCCA_HTML.find(VALID_WCCCA_HTML_STR) == std::string::npos || WCCCA_HTML.rfind(WCCCA_LOAD_MARKER) == std::string::npos) {
+       
+        if (WCCCA_HTML.empty()) {
             return false;
         }
+
+        if (WCCCA_HTML.find(VALID_WCCCA_HTML_STR) == std::string::npos) {
+            return false;
+        }
+
         return true;
     }
 
@@ -127,6 +133,11 @@ namespace util
         size_t location_start = WCCCA_HTML.rfind("<script type=\"text/javascript\">");
         size_t location_end = WCCCA_HTML.rfind("</script>");
         std::string gps_code = WCCCA_HTML.substr(location_start, location_end - location_start);
+
+        // Check if theres any data.
+        if (gps_code.find(WCCCA_LOAD_MARKER) == std::string::npos) {
+            return WCCCA_GPS_DATA;
+        }
 
         // Reduce further
         location_start = gps_code.find(WCCCA_LOAD_MARKER);
