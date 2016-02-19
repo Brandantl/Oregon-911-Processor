@@ -79,6 +79,9 @@ namespace util
                 ss << data;
                 Poco::StreamCopier::copyStream(ss, os);
             }
+            else {
+                client_session.sendRequest(req);
+            }
 
             req.set("User-Agent", "Oregon 911 Processor");
 
