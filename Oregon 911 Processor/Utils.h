@@ -112,6 +112,13 @@ namespace util
         return 0;
     }
 
+    inline bool isWCCCAHTMLValid(const std::string & WCCCA_HTML) {
+        if (WCCCA_HTML.empty() || WCCCA_HTML.find(VALID_WCCCA_HTML_STR) == std::string::npos || WCCCA_HTML.rfind(WCCCA_LOAD_MARKER) == std::string::npos) {
+            return false;
+        }
+        return true;
+    }
+
     inline std::vector<struct WCCCA_JSON> getWCCCAGPSFromHTML(const std::string & WCCCA_HTML) {
         std::vector<struct WCCCA_JSON> WCCCA_GPS_DATA;
 
@@ -121,7 +128,7 @@ namespace util
         std::string gps_code = WCCCA_HTML.substr(location_start, location_end - location_start);
 
         // Reduce further
-        location_start = gps_code.find("LoadMarker");
+        location_start = gps_code.find(WCCCA_LOAD_MARKER);
         gps_code = gps_code.substr(location_start, gps_code.length());
         gps_code = gps_code.substr(0, gps_code.find("\n", 0));
 
@@ -129,7 +136,7 @@ namespace util
         Poco::StringTokenizer rows(gps_code, ";");
 
         for (int i = 0; i < rows.count(); i++) {
-            if (0 == rows[i].find("LoadMarker")) {
+            if (0 == rows[i].find(WCCCA_LOAD_MARKER)) {
                 // Ok now on this CPU intensive journey we need to remove "LoadMarker(" and the last ")".
                 std::string row = rows[i];
 

@@ -11,3 +11,5 @@
 #define WCCCA_PITS_URL          "http://www.wccca.com/PITSv2/Default.aspx"
 #define WCCCA_PITS_POST         "__viewstate="
 #define GET_WCCCA_DATA()        (util::http_get(WCCCA_PITS_URL, WCCCA_PITS_POST))
+#define VALID_WCCCA_HTML_STR    "Joint CAD Incident Tracking System"
+#define WCCCA_LOAD_MARKER       "LoadMarker"

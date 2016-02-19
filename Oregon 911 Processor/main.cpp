@@ -20,8 +20,10 @@ int main() {
 
     const std::string WCCCA_STR  = GET_WCCCA_DATA();
 
-    vector<struct WCCCA_JSON> gpsData = util::getWCCCAGPSFromHTML(WCCCA_STR);
-
+    vector<struct WCCCA_JSON> gpsData;
+    if (util::isWCCCAHTMLValid(WCCCA_STR)) {
+        gpsData = util::getWCCCAGPSFromHTML(WCCCA_STR);
+    }
 
 
     delete DataCache;
