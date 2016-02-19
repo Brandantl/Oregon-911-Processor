@@ -54,15 +54,24 @@ namespace util
         std::string content;
         try {
             // Initialize session
-            Poco::URI uri("http://google.com");
+            Poco::URI uri(url);
             Poco::Net::HTTPClientSession client_session(uri.getHost(), uri.getPort());
+            client_session.setKeepAlive(true);
 
             // Prepare and send request
             std::string path(uri.getPathAndQuery());
+
             Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_GET, path, Poco::Net::HTTPMessage::HTTP_1_1);
 
             if (!data.empty()) {
+                // Nevermind we want to post.
+                req.setMethod(Poco::Net::HTTPRequest::HTTP_POST);
+
+                // Set Expect 100 continue
+                req.set("Expect", "100-continue");
+
                 req.setContentType("application/x-www-form-urlencoded");
+                req.setKeepAlive(true); // notice setKeepAlive is also called on client_session (above)
                 req.setContentLength(data.length());
                 std::ostream& os = client_session.sendRequest(req);
 
@@ -70,6 +79,8 @@ namespace util
                 ss << data;
                 Poco::StreamCopier::copyStream(ss, os);
             }
+
+            req.set("User-Agent", "Oregon 911 Processor");
 
             // Get response
             Poco::Net::HTTPResponse res;
@@ -83,7 +94,5 @@ namespace util
         }
         return content;
     }
-
-
 
 }

@@ -17,6 +17,8 @@ int main() {
 
     cout << "Oregon 911 Importer! \n\n";
 
+    cout << util::http_get("http://www.wccca.com/PITSv2/Default.aspx", "__viewstate=");
+
     delete DataCache;
     return 0;
 }
