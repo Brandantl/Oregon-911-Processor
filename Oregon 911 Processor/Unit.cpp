@@ -22,7 +22,7 @@ void Unit::updateUnit(const Unit & obj)
     }
 }
 
-void Unit::setName(const std::string & _name, const char & county)
+void Unit::setName(const std::string & _name)
 {
     name = _name;
     agency = DataCache->getUnitInfo(_name)->agency;

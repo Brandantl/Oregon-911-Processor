@@ -6,6 +6,7 @@
 #include "data.h"
 #include <string>
 #include <iterator>
+#include <iostream>
 #include <sstream>
 #include <vector>
 
@@ -135,7 +136,7 @@ namespace util
         // Ok we reduced enough, lets split the string by ;
         Poco::StringTokenizer rows(gps_code, ";");
 
-        for (int i = 0; i < rows.count(); i++) {
+        for (size_t i = 0; i < rows.count(); i++) {
             if (0 == rows[i].find(WCCCA_LOAD_MARKER)) {
                 // Ok now on this CPU intensive journey we need to remove "LoadMarker(" and the last ")".
                 std::string row = rows[i];
