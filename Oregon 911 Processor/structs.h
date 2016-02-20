@@ -27,6 +27,7 @@ struct gps {
 struct IncidentHeader {
     int callNumber;
     char county;
+    char type;
     bool ignoreGC;
     bool operator<(const IncidentHeader & n) const {
         return this->callNumber < n.callNumber && this->county < n.county; 

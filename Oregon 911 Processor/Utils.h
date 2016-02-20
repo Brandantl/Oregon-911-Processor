@@ -19,6 +19,10 @@
 #include <Poco/String.h>
 #include <Poco/Path.h>
 #include <Poco/URI.h>
+
+#include <tidyplatform.h>
+#include <tidybuffio.h>
+#include <tidy.h>
 namespace util
 {
     // Cycles though all of knownAgencyList until it finds what it wants or returns an empty string.
@@ -114,7 +118,7 @@ namespace util
     }
 
     inline bool isWCCCAHTMLValid(const std::string & WCCCA_HTML) {
-       
+
         if (WCCCA_HTML.empty()) {
             return false;
         }
@@ -129,15 +133,15 @@ namespace util
     inline std::vector<struct WCCCA_JSON> getWCCCAGPSFromHTML(const std::string & WCCCA_HTML) {
         std::vector<struct WCCCA_JSON> WCCCA_GPS_DATA;
 
+        // Check if theres any data.
+        if (WCCCA_HTML.rfind(WCCCA_LOAD_MARKER) == std::string::npos) {
+            return WCCCA_GPS_DATA;
+        }
+
         // Find GPS Location
         size_t location_start = WCCCA_HTML.rfind("<script type=\"text/javascript\">");
         size_t location_end = WCCCA_HTML.rfind("</script>");
         std::string gps_code = WCCCA_HTML.substr(location_start, location_end - location_start);
-
-        // Check if theres any data.
-        if (gps_code.find(WCCCA_LOAD_MARKER) == std::string::npos) {
-            return WCCCA_GPS_DATA;
-        }
 
         // Reduce further
         location_start = gps_code.find(WCCCA_LOAD_MARKER);
@@ -174,6 +178,7 @@ namespace util
                 // Header
                 gpsData.h.callNumber = stoi(callNumber);
                 gpsData.h.county = util::getCountyByName(county);
+                gpsData.h.type = 0; // We can't determine the type correctly w/ this data
                 gpsData.h.ignoreGC = false;
 
                 // Location
@@ -188,4 +193,44 @@ namespace util
         }
         return WCCCA_GPS_DATA;
     }
+
+    inline std::string tidyHTML(const std::string & HTML) {
+        TidyDoc tidyDoc = tidyCreate();
+        TidyBuffer tidyOutputBuffer = { 0 };
+
+        bool configSuccess = tidyOptSetBool(tidyDoc, TidyXmlOut, yes)
+            && tidyOptSetBool(tidyDoc, TidyQuiet, yes)
+            && tidyOptSetBool(tidyDoc, TidyQuoteNbsp, no)
+            && tidyOptSetBool(tidyDoc, TidyXmlDecl, yes) //XML declaration on top of the content
+            && tidyOptSetBool(tidyDoc, TidyForceOutput, yes)
+            && tidyOptSetValue(tidyDoc, TidyInCharEncoding, "utf8") // Output from here should be UTF-8
+            && tidyOptSetValue(tidyDoc, TidyOutCharEncoding, "utf8") // Output from CURL is UTF-8
+            && tidyOptSetBool(tidyDoc, TidyNumEntities, yes)
+            && tidyOptSetBool(tidyDoc, TidyShowWarnings, no)
+            && tidyOptSetInt(tidyDoc, TidyDoctypeMode, TidyDoctypeOmit); //Exclude DOCTYPE
+
+        int tidyResponseCode = -1;
+
+        if (configSuccess) {
+            std::vector<unsigned char> bytes(HTML.begin(), HTML.end());
+            TidyBuffer buf;
+            tidyBufInit(&buf);
+            for (size_t i = 0; i < bytes.size(); i++) {
+                tidyBufAppend(&buf, &bytes[i], 1);
+            }
+            tidyResponseCode = tidyParseBuffer(tidyDoc, &buf);
+        }
+
+        if (tidyResponseCode >= 0) {
+            tidyResponseCode = tidySaveBuffer(tidyDoc, &tidyOutputBuffer);
+        }
+        if (tidyResponseCode < 0) {
+            throw ("Tidy encountered an error while parsing an HTML response. Tidy response code: " + tidyResponseCode);
+        }
+        std::string ret = (char*)tidyOutputBuffer.bp;
+        tidyBufFree(&tidyOutputBuffer);
+        tidyRelease(tidyDoc);
+        return ret;
+    }
+
 }
