@@ -125,6 +125,7 @@ namespace util
             return false;
         }
 
+
         if (WCCCA_HTML.find(VALID_WCCCA_HTML_STR) == std::string::npos) {
             return false;
         }
@@ -135,15 +136,15 @@ namespace util
     inline std::vector<struct WCCCA_JSON> getWCCCAGPSFromHTML(const std::string & WCCCA_HTML) {
         std::vector<struct WCCCA_JSON> WCCCA_GPS_DATA;
 
-        // Check if theres any data.
-        if (WCCCA_HTML.rfind(WCCCA_LOAD_MARKER) == std::string::npos) {
-            return WCCCA_GPS_DATA;
-        }
-
         // Find GPS Location
         size_t location_start = WCCCA_HTML.rfind("<script type=\"text/javascript\">");
         size_t location_end = WCCCA_HTML.rfind("</script>");
         std::string gps_code = WCCCA_HTML.substr(location_start, location_end - location_start);
+
+        // Check if theres any data.
+        if (gps_code.find(WCCCA_LOAD_MARKER) == std::string::npos) {
+            return WCCCA_GPS_DATA;
+        }
 
         // Reduce further
         location_start = gps_code.find(WCCCA_LOAD_MARKER);
