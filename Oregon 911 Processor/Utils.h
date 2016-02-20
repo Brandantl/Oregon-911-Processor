@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <regex>
 
 #include <Poco/Net/HTTPClientSession.h>
 #include <Poco/RegularExpression.h>
@@ -158,24 +159,28 @@ namespace util
                 std::string row = rows[i];
 
                 // "LoadMarker(" is 11 characters long with the -1 for the ")" at the end.
-                const int lengthOfLoadMarker = 11;
-                row = row.substr(lengthOfLoadMarker, row.length() - lengthOfLoadMarker - 1);
+                //const int lengthOfLoadMarker = 11;
+                // row = row.substr(lengthOfLoadMarker, row.length() - lengthOfLoadMarker - 1);
 
-                // First search string for comma in
+                // Replace parseFloat() with ' ' so RegEx can read it easier.
+                row = Poco::replace(row, "parseFloat(", "'");
+                row = Poco::replace(row, ")", "'");
 
-                // Strip: NOTICE NOTICE NOTICE Removing ' means that anything with a comma in it
-                // will fail to parse. Example Trf Acc, Non-Inj
-                row.erase(std::remove(row.begin(), row.end(), '\''), row.end());
-                row.erase(std::remove(row.begin(), row.end(), ')'), row.end());
+                // Standard Regex
+                std::vector<std::string> columns;
+                std::regex rgx("'([^']+)'");
+                std::sregex_token_iterator iter(row.begin(), row.end(), rgx, 0);
+                std::sregex_token_iterator end;
+                for (; iter != end; ++iter) {
+                    columns.push_back(*iter);
+                }
 
-                // We need to split it now by commads.
-                Poco::StringTokenizer columns(row, ",");
-
-                const int lengthOfparseFloat = 11;
-                std::string lat = columns[0].substr(lengthOfparseFloat, columns[0].length());
-                std::string lon = columns[1].substr(lengthOfparseFloat, columns[1].length());
-                std::string callNumber = columns[3].substr(1, columns[3].length());
-                std::string county = columns[4].substr(1, columns[3].length());
+                // Strip the "'" 's in all of the vars. 
+                char const margin = 2;
+                std::string lat = columns[0].substr(1, columns[0].length() - margin);
+                std::string lon = columns[1].substr(1, columns[1].length() - margin);
+                std::string callNumber = columns[3].substr(1, columns[3].length() - margin);
+                std::string county = columns[4].substr(1, columns[4].length() - margin);
 
                 struct WCCCA_JSON gpsData;
 
@@ -190,7 +195,7 @@ namespace util
                 gpsData.location.lon = stod(lon);
 
                 // misc
-                gpsData.callSum = Poco::toUpper(columns[2].substr(1, columns[2].length()));
+                gpsData.callSum = Poco::toUpper(columns[2].substr(1, columns[2].length() - margin));
 
                 WCCCA_GPS_DATA.push_back(gpsData);
             }
