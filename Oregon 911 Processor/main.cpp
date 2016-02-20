@@ -37,6 +37,8 @@ int main() {
             // Convert HTML to XHTML so Poco can read it.
             std::string tidyResult = util::tidyHTML(WCCCA_STR);
 
+            ////*[@id="rptIncidents_ctl00_lblCallType"]
+
             try
             {
                 Poco::XML::DOMParser parser;
@@ -45,11 +47,15 @@ int main() {
                 Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(tidyResult);
 
                 Poco::XML::NodeIterator it(pDoc, Poco::XML::NodeFilter::SHOW_TEXT);
-                Poco::XML::Node* pNode = it.nextNode();
-                while (pNode)
+                Poco::XML::Node* pNode = it.root();
+
+                Poco::XML::Node * pNewNode = pNode->getNodeByPath(XHTML_BODY_PATH);
+                
+
+                while (pNewNode)
                 {
-                    std::cout << pNode->nodeType() << ":" << pNode->nodeValue() << std::endl;
-                    pNode = it.nextNode();
+                    std::cout << pNewNode->nodeType() << ":" << pNewNode->nodeValue() << std::endl;
+                    pNewNode = pNewNode->nextSibling();
                 }
 
 

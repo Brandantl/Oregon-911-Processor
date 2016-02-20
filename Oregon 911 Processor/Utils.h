@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <Poco/Net/HTTPClientSession.h>
+#include <Poco/RegularExpression.h>
 #include <Poco/Net/HTTPResponse.h>
 #include <Poco/StringTokenizer.h>
 #include <Poco/Net/HTTPRequest.h>
@@ -160,7 +161,10 @@ namespace util
                 const int lengthOfLoadMarker = 11;
                 row = row.substr(lengthOfLoadMarker, row.length() - lengthOfLoadMarker - 1);
 
-                // Strip
+                // First search string for comma in
+
+                // Strip: NOTICE NOTICE NOTICE Removing ' means that anything with a comma in it
+                // will fail to parse. Example Trf Acc, Non-Inj
                 row.erase(std::remove(row.begin(), row.end(), '\''), row.end());
                 row.erase(std::remove(row.begin(), row.end(), ')'), row.end());
 

@@ -13,3 +13,6 @@
 #define GET_WCCCA_DATA()        (util::http_get(WCCCA_PITS_URL, WCCCA_PITS_POST))
 #define VALID_WCCCA_HTML_STR    "Joint CAD Incident Tracking System"
 #define WCCCA_LOAD_MARKER       "LoadMarker"
+
+
+#define XHTML_BODY_PATH   "/html/body/"
