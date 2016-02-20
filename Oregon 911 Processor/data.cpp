@@ -1,6 +1,6 @@
 #include "data.h"
 
-const stationInfoList knownStationList[] {
+const stationInfoList knownStationList[]{
     "50", 'W', "WAL", "TUALATIN VALLEY FIRE & RESCUE",
     "214", 'C', "MAF", "LAKE OSWEGO F&R&LIFE SAFETY",
     "11", 'W', "GAF", "GASTON RFPD",
@@ -866,5 +866,53 @@ const std::string knownCallFeilds[]
     "1ALMD1",
     "1ALMC",
     "1ALMB",
+    ""                                       // End, do not remove.
+};
+
+const std::string   knownPoliceStations[]{
+    "WX",
+    "W81",
+    "W80",
+    "W71",
+    "W70",
+    "W61",
+    "W60",
+    "W51",
+    "W50",
+    "W41",
+    "W40",
+    "W31",
+    "W30",
+    "W21",
+    "W20",
+    "U4",
+    "U3",
+    "U2",
+    "U1",
+    "T5",
+    "T4",
+    "T3",
+    "T2",
+    "T1",
+    "S3",
+    "S2",
+    "S1",
+    "N1",
+    "K1",
+    "H5",
+    "H4",
+    "H3",
+    "H2",
+    "H1",
+    "G1",
+    "F2",
+    "F1",
+    "C3",
+    "C2",
+    "B4",
+    "B3",
+    "B2",
+    "B1",
+    "A3",
     ""                                       // End, do not remove.
 };

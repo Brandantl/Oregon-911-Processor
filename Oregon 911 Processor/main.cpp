@@ -29,16 +29,37 @@ int main() {
 
     vector<struct WCCCA_JSON> gpsData;
     if (util::isWCCCAHTMLValid(WCCCA_STR)) {
+        
         gpsData = util::getWCCCAGPSFromHTML(WCCCA_STR);
-    }
 
-    if (gpsData.size() > 0) {
-        // Convert HTML to XHTML so Poco can read it.
-        std::string tidyResult = util::tidyHTML(WCCCA_STR);
+        // If theres GPS data then it's highly likely theres call data too!
+        if (gpsData.size() > 0) {
+            // Convert HTML to XHTML so Poco can read it.
+            std::string tidyResult = util::tidyHTML(WCCCA_STR);
 
-        Poco::XML::DOMParser parser;
-        Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(tidyResult);
+            try
+            {
+                Poco::XML::DOMParser parser;
+                parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACES, true);
+                parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACE_PREFIXES, true);
+                Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(tidyResult);
 
+                Poco::XML::NodeIterator it(pDoc, Poco::XML::NodeFilter::SHOW_TEXT);
+                Poco::XML::Node* pNode = it.nextNode();
+                while (pNode)
+                {
+                    std::cout << pNode->nodeType() << ":" << pNode->nodeValue() << std::endl;
+                    pNode = it.nextNode();
+                }
+
+
+            }
+            catch (Poco::Exception& e)
+            {
+                std::cerr << e.displayText() << std::endl;
+            }
+
+        }
 
     }
 
