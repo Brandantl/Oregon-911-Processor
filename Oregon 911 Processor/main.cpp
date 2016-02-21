@@ -11,6 +11,7 @@
 #include "DataMaps.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 #include <Poco/DOM/DOMParser.h>
@@ -37,6 +38,16 @@ int main() {
             // Convert HTML to XHTML so Poco can read it.
             std::string tidyResult = util::tidyHTML(WCCCA_STR);
 
+            // Print out
+            ofstream myfile;
+            myfile.open("before.html");
+            myfile << WCCCA_STR;
+            myfile.close();
+
+            myfile.open("after.html");
+            myfile << tidyResult;
+            myfile.close();
+
             try
             {
                 Poco::XML::DOMParser parser;
@@ -45,12 +56,21 @@ int main() {
                 Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(tidyResult);
 
                 //Iterate over every child node (non-recursively)
-                for (Poco::XML::Node *pNode = pDoc->getNodeByPath("html/body/form/div/div"); pNode != 0; pNode = pNode->nextSibling()) {
+                for (Poco::XML::Node *pNode = pDoc->getNodeByPath("html/body/form/"); pNode != 0; pNode = pNode->nextSibling()) {
                     auto pElem = dynamic_cast<Poco::XML::Element*>(pNode);
 
                     if (pElem) {
-                        std::cout << "Node: " << pElem->tagName() << " " << pElem->innerText() << " Value: " << pElem->nodeValue() << endl;
-                        std::cout << "\n";
+
+                        if (pElem->getAttribute("id") == "wccca-incidents") {
+                            cout << "Yes!";
+                        }
+
+                       /* for (Poco::XML::Node *pNode2 = pDoc->getNodeByPath("html/body/form/div/div"); pNode2 != 0; pNode2 = pNode->nextSibling()) {
+                            auto pElem2 = dynamic_cast<Poco::XML::Element*>(pNode2);
+                        }*/
+
+                        //std::cout << "Node: " << pElem->tagName() << " " << pElem->innerText() << " Value: " << pElem->nodeValue() << endl;
+                        //std::cout << "\n";
                     }
                 }
 

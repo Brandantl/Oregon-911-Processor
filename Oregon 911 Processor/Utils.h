@@ -3,6 +3,7 @@
     Date:   2/16/2016
 */
 #pragma once
+#include "or911.h"
 #include "data.h"
 #include <string>
 #include <iterator>
@@ -210,6 +211,7 @@ namespace util
 
         bool configSuccess = tidyOptSetBool(tidyDoc, TidyXmlOut, yes)
             && tidyOptSetBool(tidyDoc, TidyQuiet, yes)
+            && tidyOptSetInt(tidyDoc, TidyWrapLen, 1200)
             && tidyOptSetBool(tidyDoc, TidyQuoteNbsp, no)
             && tidyOptSetBool(tidyDoc, TidyXmlDecl, yes) //XML declaration on top of the content
             && tidyOptSetBool(tidyDoc, TidyForceOutput, yes)
@@ -222,18 +224,17 @@ namespace util
         int tidyResponseCode = -1;
 
         if (configSuccess) {
-            std::vector<unsigned char> bytes(HTML.begin(), HTML.end());
-            TidyBuffer buf;
-            tidyBufInit(&buf);
-            for (size_t i = 0; i < bytes.size(); i++) {
-                tidyBufAppend(&buf, &bytes[i], 1);
-            }
-            tidyResponseCode = tidyParseBuffer(tidyDoc, &buf);
+            tidyResponseCode = tidyParseString(tidyDoc, HTML.c_str());
+#if READABLE_DEBUG
+            tidyResponseCode = tidyCleanAndRepair(tidyDoc);                 // Tidy it up!
+#endif
+            tidyResponseCode = tidySaveBuffer(tidyDoc, &tidyOutputBuffer);
         }
 
         if (tidyResponseCode >= 0) {
             tidyResponseCode = tidySaveBuffer(tidyDoc, &tidyOutputBuffer);
         }
+
         if (tidyResponseCode < 0) {
             throw ("Tidy encountered an error while parsing an HTML response. Tidy response code: " + tidyResponseCode);
         }
