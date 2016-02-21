@@ -37,8 +37,6 @@ int main() {
             // Convert HTML to XHTML so Poco can read it.
             std::string tidyResult = util::tidyHTML(WCCCA_STR);
 
-            ////*[@id="rptIncidents_ctl00_lblCallType"]
-
             try
             {
                 Poco::XML::DOMParser parser;
@@ -46,18 +44,15 @@ int main() {
                 parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACE_PREFIXES, true);
                 Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(tidyResult);
 
-                Poco::XML::NodeIterator it(pDoc, Poco::XML::NodeFilter::SHOW_TEXT);
-                Poco::XML::Node* pNode = it.root();
+                //Iterate over every child node (non-recursively)
+                for (Poco::XML::Node *pNode = pDoc->getNodeByPath("html/body/form/div/div"); pNode != 0; pNode = pNode->nextSibling()) {
+                    auto pElem = dynamic_cast<Poco::XML::Element*>(pNode);
 
-                Poco::XML::Node * pNewNode = pNode->getNodeByPath(XHTML_BODY_PATH);
-                
-
-                while (pNewNode)
-                {
-                    std::cout << pNewNode->nodeType() << ":" << pNewNode->nodeValue() << std::endl;
-                    pNewNode = pNewNode->nextSibling();
+                    if (pElem) {
+                        std::cout << "Node: " << pElem->tagName() << " " << pElem->innerText() << " Value: " << pElem->nodeValue() << endl;
+                        std::cout << "\n";
+                    }
                 }
-
 
             }
             catch (Poco::Exception& e)
