@@ -3,7 +3,6 @@
     Date:   2/16/2016
 */
 #pragma once
-#include "or911.h"
 #include "data.h"
 #include <string>
 #include <iterator>
@@ -210,8 +209,8 @@ namespace util
         TidyBuffer tidyOutputBuffer = { 0 };
 
         bool configSuccess = tidyOptSetBool(tidyDoc, TidyXmlOut, yes)
-            && tidyOptSetBool(tidyDoc, TidyQuiet, yes)
             && tidyOptSetInt(tidyDoc, TidyWrapLen, 1200)
+            && tidyOptSetBool(tidyDoc, TidyQuiet, yes)
             && tidyOptSetBool(tidyDoc, TidyQuoteNbsp, no)
             && tidyOptSetBool(tidyDoc, TidyXmlDecl, yes) //XML declaration on top of the content
             && tidyOptSetBool(tidyDoc, TidyForceOutput, yes)
@@ -224,11 +223,14 @@ namespace util
         int tidyResponseCode = -1;
 
         if (configSuccess) {
-            tidyResponseCode = tidyParseString(tidyDoc, HTML.c_str());
-#if READABLE_DEBUG
-            tidyResponseCode = tidyCleanAndRepair(tidyDoc);                 // Tidy it up!
-#endif
-            tidyResponseCode = tidySaveBuffer(tidyDoc, &tidyOutputBuffer);
+            std::vector<unsigned char> bytes(HTML.begin(), HTML.end());
+            TidyBuffer buf;
+            tidyBufInit(&buf);
+            size_t byteSize = bytes.size();
+            for (size_t i = 0; i < byteSize; i++) {
+                tidyBufAppend(&buf, &bytes[i], 1);
+            }
+            tidyResponseCode = tidyParseBuffer(tidyDoc, &buf);
         }
 
         if (tidyResponseCode >= 0) {

@@ -26,7 +26,7 @@ int main() {
 
     cout << "Oregon 911 Importer! \n\n";
 
-    const std::string WCCCA_STR = GET_WCCCA_DATA();
+    const std::string WCCCA_STR = util::tidyHTML(GET_WCCCA_DATA());
 
     vector<struct WCCCA_JSON> gpsData;
     if (util::isWCCCAHTMLValid(WCCCA_STR)) {
@@ -35,25 +35,12 @@ int main() {
 
         // If theres GPS data then it's highly likely theres call data too!
         if (gpsData.size() > 0) {
-            // Convert HTML to XHTML so Poco can read it.
-            std::string tidyResult = util::tidyHTML(WCCCA_STR);
-
-            // Print out
-            ofstream myfile;
-            myfile.open("before.html");
-            myfile << WCCCA_STR;
-            myfile.close();
-
-            myfile.open("after.html");
-            myfile << tidyResult;
-            myfile.close();
-
             try
             {
                 Poco::XML::DOMParser parser;
                 parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACES, true);
                 parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACE_PREFIXES, true);
-                Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(tidyResult);
+                Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(WCCCA_STR);
 
                 //Iterate over every child node (non-recursively)
                 for (Poco::XML::Node *pNode = pDoc->getNodeByPath("html/body/form/"); pNode != 0; pNode = pNode->nextSibling()) {
