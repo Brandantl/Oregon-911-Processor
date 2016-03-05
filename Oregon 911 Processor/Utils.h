@@ -60,7 +60,7 @@ namespace util
     }
 
     inline std::string http_get(const std::string & url, const std::string & data = "") {
-        std::string content;
+        std::ostringstream oss;
         try {
             // Initialize session
             Poco::URI uri(url);
@@ -100,12 +100,13 @@ namespace util
             std::istream& is = client_session.receiveResponse(res);
 
             // Set return string
-            content = { std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>() };
+            oss << is.rdbuf();
+           // content = { std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>() };
         }
         catch (Poco::Exception& e) {
             std::cerr << "Exception: " << e.what() << std::endl;
         }
-        return content;
+        return oss.str();
     }
 
     inline char getCountyByName(const std::string & county) {
