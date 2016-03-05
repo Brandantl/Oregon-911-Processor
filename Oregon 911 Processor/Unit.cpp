@@ -25,7 +25,13 @@ void Unit::updateUnit(const Unit & obj)
 void Unit::setName(const std::string & _name)
 {
     name = _name;
-    agency = DataCache->getUnitInfo(_name)->agency;
+
+    // Set known agency name
+    const unitInfoList * info = DataCache->getUnitInfo(_name);
+    if (info) {
+        agency = info->agency;
+        station = info->station;
+    }
 }
 
 void Unit::setAgency(const std::string & _agency)

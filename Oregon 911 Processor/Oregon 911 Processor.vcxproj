@@ -83,6 +83,7 @@
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\lib;$(SolutionDir)\$(SolutionName)\extern\tidy_html5\x32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>tidy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,6 +131,7 @@
     <ClInclude Include="structs.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="WCCCAParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Call.cpp" />
@@ -138,6 +140,7 @@
     <ClCompile Include="Incidents.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="WCCCAParser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

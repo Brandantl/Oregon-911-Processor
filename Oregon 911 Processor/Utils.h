@@ -29,7 +29,7 @@ namespace util
 {
     // Cycles though all of knownAgencyList until it finds what it wants or returns an empty string.
     inline std::string getAgencyByStation(const std::string & abbv) {
-        std::string ret = "UNK";
+        std::string ret = DEFAULT_STATION_ABBV;
         bool stop = false;
         int i = 0;
         while (!stop) {
@@ -93,7 +93,7 @@ namespace util
                 client_session.sendRequest(req);
             }
 
-            req.set("User-Agent", "Oregon 911 Processor");
+            req.set("User-Agent", USER_AGENT);
 
             // Get response
             Poco::Net::HTTPResponse res;
@@ -110,11 +110,11 @@ namespace util
 
     inline char getCountyByName(const std::string & county) {
 
-        if (Poco::toLower(county) == "wccca") {
-            return 'W';
+        if (Poco::toLower(county) == WCCCA) {
+            return LW;
         }
-        else if (Poco::toLower(county) == "ccom") {
-            return 'C';
+        else if (Poco::toLower(county) == CCOM) {
+            return LC;
         }
         return 0;
     }
@@ -137,8 +137,8 @@ namespace util
         std::vector<struct WCCCA_JSON> WCCCA_GPS_DATA;
 
         // Find GPS Location
-        size_t location_start = WCCCA_HTML.rfind("<script type=\"text/javascript\">");
-        size_t location_end = WCCCA_HTML.rfind("</script>");
+        size_t location_start = WCCCA_HTML.rfind(HTML_SCRIPT_START);
+        size_t location_end = WCCCA_HTML.rfind(HTML_SCRIPT_END);
         std::string gps_code = WCCCA_HTML.substr(location_start, location_end - location_start);
 
         // Check if theres any data.

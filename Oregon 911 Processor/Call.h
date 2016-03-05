@@ -15,7 +15,7 @@ enum class callTime {
     entry,
     dispatch,
     enroute,
-    clear
+    onscene
 };
 
 class Call {
