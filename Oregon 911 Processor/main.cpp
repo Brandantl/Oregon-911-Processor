@@ -66,7 +66,8 @@ int main() {
                 std::vector<string>     callSummeries;
                 std::vector<string>     addresses;
                 std::vector<string>     callTime[4];
-                std::vector<string>     units;
+                std::vector<string>     agency;
+                std::vector<string>     station;
 
                 while (pNode)
                 {
@@ -120,11 +121,20 @@ int main() {
                                     callTime[3].push_back(timeTemp);
                                 }
                             }
-                            else  if (nName == "title" && nValue == "Agency ID") {
-                                units.push_back(pNode->innerText());
+                            else  if (nName == "class" && nValue == "units") {
+                                // These skips are required because agency cannot be found
+                                // by name and value as the value constantly changes.
+
+                                // Skip node
+                                pNode = it.nextNode();
+                                agency.push_back(pNode->innerText());
+
+                                // Skip node
+                                pNode = it.nextNode(); // Skip past Agency node
+                                pNode = it.nextNode(); // Skip past a / 
+                                pNode = it.nextNode(); // ???
+                                station.push_back(pNode->innerText()); // It works.
                             }
-
-
                         }
                     }
                     pNode = it.nextNode();
