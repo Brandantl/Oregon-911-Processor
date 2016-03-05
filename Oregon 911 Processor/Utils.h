@@ -165,7 +165,7 @@ namespace util
 
                 // Replace parseFloat() with ' ' so RegEx can read it easier.
                 row = Poco::replace(row, "parseFloat(", "'");
-                row = Poco::replace(row, ")", "'");
+                row = Poco::replace(row, "),", "',");
 
                 // Standard Regex
                 std::vector<std::string> columns;
