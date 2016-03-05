@@ -20,6 +20,8 @@ using namespace std;
 #include <Poco/DOM/NodeFilter.h>
 #include <Poco/DOM/AutoPtr.h>
 #include <Poco/SAX/InputSource.h>
+#include <Poco/DOM/NamedNodeMap.h>
+#include <Poco/String.h>
 
 int main() {
     DataCache = new DataMaps();
@@ -28,47 +30,114 @@ int main() {
 
     const std::string WCCCA_STR = util::tidyHTML(GET_WCCCA_DATA());
 
+    ofstream myfile;
+    myfile.open("wccca.html");
+    myfile << WCCCA_STR;
+    myfile.close();
+
+    std::string WCCCA_DATA;
+
     vector<struct WCCCA_JSON> gpsData;
     if (util::isWCCCAHTMLValid(WCCCA_STR)) {
-        
+
         gpsData = util::getWCCCAGPSFromHTML(WCCCA_STR);
 
         // If theres GPS data then it's highly likely theres call data too!
         if (gpsData.size() > 0) {
             try
             {
+                // HTML Parser
                 Poco::XML::DOMParser parser;
                 parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACES, true);
                 parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACE_PREFIXES, true);
                 Poco::XML::AutoPtr<Poco::XML::Document> pDoc = parser.parseString(WCCCA_STR);
+                Poco::XML::NodeIterator it(pDoc->getNodeByPath("html/body/form/div"), Poco::XML::NodeFilter::SHOW_ALL);
+                Poco::XML::Node* pNode = it.nextNode();
 
-                //Iterate over every child node (non-recursively)
-                for (Poco::XML::Node *pNode = pDoc->getNodeByPath("html/body/form/"); pNode != 0; pNode = pNode->nextSibling()) {
-                    auto pElem = dynamic_cast<Poco::XML::Element*>(pNode);
+                Poco::XML::NamedNodeMap* attributes = NULL;
+                Poco::XML::Node* attribute = NULL;
 
-                    if (pElem) {
+                string nName;
+                string nValue;
+                string timeTemp;
 
-                        if (pElem->getAttribute("id") == "wccca-incidents") {
-                            cout << "Yes!";
+                std::vector<string>     callNumbers;
+                std::vector<char>       counties;
+                std::vector<string>     callSummeries;
+                std::vector<string>     addresses;
+                std::vector<string>     callTime[4];
+                std::vector<string>     units;
+
+                while (pNode)
+                {
+                    if (pNode->hasAttributes()) {
+                        attributes = pNode->attributes();
+                        bool found = false;
+                        for (unsigned int i = 0; i < attributes->length(); i++)
+                        {
+                            attribute = attributes->item(i);
+                            nName = attribute->nodeName();
+                            nValue = attribute->getNodeValue();
+
+
+                            if (nName == "id" && nValue.find("CallNo") != std::string::npos) {
+                                // We found a call number!
+                                callNumbers.push_back(pNode->innerText());
+                                if (nValue.find("CCOM") != std::string::npos) {
+                                    counties.push_back('C');
+                                }
+                                else {
+                                    counties.push_back('W');
+                                }
+                            }
+                            else  if (nName == "id" && nValue.find("CallType") != std::string::npos) {
+                                callSummeries.push_back(Poco::toUpper(pNode->innerText()));
+                            }
+                            else  if (nName == "class" && nValue.find("address") != std::string::npos) {
+                                addresses.push_back(Poco::toUpper(pNode->innerText()));
+                            }
+                            else  if (nName == "title" && nValue == "Call Entry Time") {
+                                timeTemp = pNode->innerText();
+                                if (!timeTemp.empty()) {
+                                    callTime[0].push_back(timeTemp);
+                                }
+                            }
+                            else  if (nName == "title" && nValue == "Dispatch Time") {
+                                timeTemp = pNode->innerText();
+                                if (!timeTemp.empty()) {
+                                    callTime[1].push_back(timeTemp);
+                                }
+                            }
+                            else  if (nName == "title" && nValue == "En Route Time") {
+                                timeTemp = pNode->innerText();
+                                if (!timeTemp.empty()) {
+                                    callTime[2].push_back(timeTemp);
+                                }
+                            }
+                            else  if (nName == "title" && nValue == "On Scene Time") {
+                                timeTemp = pNode->innerText();
+                                if (!timeTemp.empty()) {
+                                    callTime[3].push_back(timeTemp);
+                                }
+                            }
+                            else  if (nName == "title" && nValue == "Agency ID") {
+                                units.push_back(pNode->innerText());
+                            }
+
+
                         }
-
-                       /* for (Poco::XML::Node *pNode2 = pDoc->getNodeByPath("html/body/form/div/div"); pNode2 != 0; pNode2 = pNode->nextSibling()) {
-                            auto pElem2 = dynamic_cast<Poco::XML::Element*>(pNode2);
-                        }*/
-
-                        //std::cout << "Node: " << pElem->tagName() << " " << pElem->innerText() << " Value: " << pElem->nodeValue() << endl;
-                        //std::cout << "\n";
                     }
+                    pNode = it.nextNode();
                 }
-
             }
             catch (Poco::Exception& e)
             {
                 std::cerr << e.displayText() << std::endl;
             }
 
-        }
+            cout << WCCCA_DATA;
 
+        }
     }
 
     delete DataCache;
