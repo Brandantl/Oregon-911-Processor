@@ -30,14 +30,14 @@ struct IncidentHeader {
     char type;
     bool ignoreGC;
     bool operator<(const IncidentHeader & n) const {
-        return this->callNumber < n.callNumber && this->county < n.county; 
+        return this->callNumber < n.callNumber && this->county < n.county;
     }
 };
 
 struct WCCCA_JSON {
-    struct IncidentHeader h;
+    struct IncidentHeader h; // NOT USED
     struct gps location;
-    std::string callSum;
+    std::string callSum;  // NOT USED
 };
 
 struct agencyList {
@@ -65,4 +65,10 @@ struct stationInfoList {
     char county;
     std::string abbv;
     std::string agency;
+};
+
+struct callIcon {
+    std::string callSummery;
+    std::string icon;
+    char type;
 };

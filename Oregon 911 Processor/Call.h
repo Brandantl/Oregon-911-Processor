@@ -45,6 +45,8 @@ public:
     void                                                setLocation(const struct gps & _location);
     void                                                setAddress(const std::string & _address);
     void                                                addFlag(const struct callSummeryEventList & _flag);
+    void                                                setTurn(const int & num);
+    void                                                setIcon(const std::string & ico);
 
     // Gets
     const IncidentHeader&                               getIncidentInfo() const;
@@ -57,6 +59,8 @@ public:
     std::string                                         getUnitsString() const;
     const std::string &                                 getAddress() const;
     std::string                                         getFlagsString() const;
+    const int &                                         getTurn();
+    const std::string &                                 getIcon();
 
     void                                                clearCallSummeryHistory();
     void                                                clearAddressHistory();
@@ -79,6 +83,8 @@ private:
     struct gps                                          location;
     std::unordered_map<std::string, 
     struct callSummeryEventList>                        Flags; //I didn't want to resize the whole file to fit that long name.
+    int                                                 Turn;
+    std::string                                         Icon;
 
     std::unordered_map<std::string, class Unit>         unitList;
 

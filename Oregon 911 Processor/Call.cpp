@@ -16,6 +16,7 @@ Call::Call() {
     for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++) {
         time[i] = "00:00:00";
     }
+    Turn = 0;
     agency = "Unknown";
 }
 
@@ -101,6 +102,16 @@ void Call::addFlag(const struct callSummeryEventList & _flag)
     Flags[_flag.EventID] = _flag;
 }
 
+void Call::setTurn(const int & num)
+{
+    Turn = num;
+}
+
+void Call::setIcon(const std::string & ico)
+{
+    Icon = ico;
+}
+
 // Gets
 
 const IncidentHeader & Call::getIncidentInfo() const
@@ -157,6 +168,16 @@ std::string Call::getFlagsString() const
         ret_str += ";";
     }
     return ret_str;
+}
+
+const int & Call::getTurn()
+{
+    return Turn;
+}
+
+const std::string & Call::getIcon()
+{
+    return Icon;
 }
 
 void Call::clearCallSummeryHistory()

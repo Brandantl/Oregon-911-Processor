@@ -10,7 +10,7 @@
 #define MAX_NUM_CALL_STATUSES   4
 #define MAX_NUM_UNIT_STATUSES   4
 
-#define UPDATE_FREQUENCY        5000 // MS
+#define UPDATE_FREQUENCY        50000 // MS
 
 #define WCCCA_PITS_URL          "http://www.wccca.com/PITSv2/Default.aspx"
 #define WCCCA_PITS_POST         "__viewstate="

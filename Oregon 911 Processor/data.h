@@ -12,3 +12,4 @@ extern const std::string            knownCallFeilds[];
 extern const callSummeryEventList   knownCallSummeryEvents[];
 extern const callSummeryEventList   knownFeildsEvents[];
 extern const std::string            knownPoliceStations[];
+extern const callIcon               knownCallIcons[];

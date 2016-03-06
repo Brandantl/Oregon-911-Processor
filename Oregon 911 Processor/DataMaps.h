@@ -18,7 +18,8 @@ public:
     const struct callSummeryEventList *                                 getCallSummeryEventsInfo(const std::string & key);
     const struct callSummeryEventList *                                 getFeildsEventsInfo(const std::string & key);
     const std::string *                                                 getCallFeild(const std::string & key);
-
+    const struct callIcon *                                             getIconInfo(const std::string & key);
+    bool                                                                isPoliceStation(const std::string & key);
 private:
     std::map<std::string, const struct stationInfoList *>		        mapStationList;
     std::map<std::string, const struct unitInfoList *>		            mapUnitList;
@@ -26,6 +27,8 @@ private:
     std::map<std::string, const struct callSummeryEventList *>		    mapCallSummeryEvents;
     std::map<std::string, const struct callSummeryEventList *>		    mapFeildsEvents;
     std::map<std::string, const std::string *>		                    mapCallFeilds;
+    std::map<std::string, const std::string *>		                    mapPoliceStations;
+    std::map<std::string, const struct callIcon *>		                mapIcons;
 };
 
 extern class DataMaps * DataCache;

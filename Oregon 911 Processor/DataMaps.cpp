@@ -22,15 +22,24 @@ DataMaps::DataMaps() {
     for (int i = 0; !knownCallSummeryEvents[i].callSummery.empty(); i++) {
         mapCallSummeryEvents[knownCallSummeryEvents[i].callSummery] = &knownCallSummeryEvents[i];
     }
-    for (int i = 0; !knownCallSummeryEvents[i].callSummery.empty(); i++) {
-        mapCallSummeryEvents[knownCallSummeryEvents[i].callSummery] = &knownCallSummeryEvents[i];
-    }
     for (int i = 0; !knownFeildsEvents[i].callSummery.empty(); i++) {
         mapFeildsEvents[knownFeildsEvents[i].callSummery] = &knownFeildsEvents[i];
     }
     for (int i = 0; !knownCallFeilds[i].empty(); i++) {
         mapCallFeilds[knownCallFeilds[i]] = &knownCallFeilds[i];
     }
+    for (int i = 0; !knownPoliceStations[i].empty(); i++) {
+        mapPoliceStations[knownPoliceStations[i]] = &knownPoliceStations[i];
+    }
+    for (int i = 0; !knownCallIcons[i].callSummery.empty(); i++) {
+        mapIcons[knownCallIcons[i].callSummery] = &knownCallIcons[i];
+    }
+}
+
+bool DataMaps::isPoliceStation(const std::string & key) {
+    if (mapPoliceStations.count(key))
+        return true;
+    return false;
 }
 
 const stationInfoList * DataMaps::getStationInfo(const std::string & key)
@@ -72,5 +81,12 @@ const std::string * DataMaps::getCallFeild(const std::string & key)
 {
     if (mapCallFeilds.count(key))
         return mapCallFeilds[key];
+    return nullptr;
+}
+
+const callIcon * DataMaps::getIconInfo(const std::string & key)
+{
+    if (mapIcons.count(key))
+        return mapIcons[key];
     return nullptr;
 }
