@@ -1,3 +1,8 @@
+/*
+Author: Brandan Tyler Lasley
+Date:   3/06/2016
+Purpose: Processes WCCCAs HTML into something useful.
+*/
 #include "WCCCAParser.h"
 #include "Utils.h"
 #include "DataMaps.h"

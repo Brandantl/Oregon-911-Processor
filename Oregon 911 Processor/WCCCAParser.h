@@ -1,3 +1,8 @@
+/*
+Author: Brandan Tyler Lasley
+Date:   3/06/2016
+Purpose: Processes WCCCAs HTML into something useful.
+*/
 #pragma once
 #include <string>
 #include "Unit.h"

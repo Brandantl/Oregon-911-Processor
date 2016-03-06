@@ -12,7 +12,7 @@
 #include "WCCCAParser.h"
 #include <iostream>
 #include <string>
-#include <Windows.h>
+#include "Poco/Thread.h"
 using namespace std;
 
 bool print_call(const Call & c);
@@ -28,7 +28,7 @@ int main() {
     while (true) {
         WCCCA_THING.parse(util::tidyHTML(GET_WCCCA_DATA()));
         WCCCA_THING.ProcessCallList(print_call);
-        Sleep(UPDATE_FREQUENCY);
+        Poco::Thread::sleep(UPDATE_FREQUENCY);
     }
 
     delete DataCache;
