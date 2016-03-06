@@ -30,7 +30,7 @@ void Unit::setName(const std::string & _name)
     const unitInfoList * info = DataCache->getUnitInfo(_name);
     if (info) {
         agency = info->agency;
-        station = info->station;
+        station = info->abbv;
     }
 }
 
