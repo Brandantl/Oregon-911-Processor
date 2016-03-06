@@ -48,8 +48,15 @@ void Call::updateCall(const Call & obj)
     this->setAddress(obj.address);
     this->setLocation(obj.location);
     this->setCallSummery(obj.callSummery);
+    this->setTurn(obj.Turn);
+
     for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++)
-        this->time[i] = obj.time[i];
+        if (obj.time[i] != TIME_NULL)
+            this->time[i] = obj.time[i];
+
+    for (auto & it : obj.unitList) {
+        this->addOrUpdateUnit(it.second);
+    }
 }
 
 // Sets

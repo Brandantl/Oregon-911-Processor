@@ -16,7 +16,8 @@ void Incidents::addOrUpdateIncident(Call & _call)
         callList[callHead.callNumber][callHead.county].updateCall(_call);
     }
     else {
-        callList[callHead.callNumber][callHead.county] = _call;
+        Call newCall = _call;
+        callList[callHead.callNumber][callHead.county] = newCall;
     }
 }
 
