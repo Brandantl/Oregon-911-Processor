@@ -25,7 +25,7 @@ public:
 
     void parse(const std::string & WCCCA_STR);
 
-    const Call    *  ProcessCallList(const std::function<bool(const class Call & _call)> & f);
+    const Call    *  ProcessCallList(const std::function<bool(Call & _call)> & f);
 private:
     int updateTurn;
     void clearData();

@@ -15,7 +15,7 @@ WCCCAParser::WCCCAParser()
     clearData();
 }
 
-const Call * WCCCAParser::ProcessCallList(const std::function<bool(const class Call&_call)>& f)
+const Call * WCCCAParser::ProcessCallList(const std::function<bool(Call & _call)>& f)
 {
     for (auto & it : callList) {
         if (!f(it)) {

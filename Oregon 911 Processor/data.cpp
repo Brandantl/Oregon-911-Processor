@@ -276,7 +276,7 @@ const callIcon knownCallIcons[] {
     "TRAUMA/ALT LOC","EMS.png",'M',
     "UNCONCIOUS","EMS.png",'M',
     "UNCONSCIO/AGONAL","EMS.png",'M',
-    "","",0
+    "","",0                                       // End, do not remove.
 };
 
 const std::string PoliceStations[] = {
@@ -324,7 +324,7 @@ const std::string PoliceStations[] = {
     "B2",
     "B1",
     "A3",
-    ""
+    ""                                       // End, do not remove.
 };
 
 const stationInfoList knownStationList[]{

@@ -71,11 +71,12 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
       <AdditionalIncludeDirectories>$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\Foundation\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\Net\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\JSON\include;$(SolutionDir)\$(SolutionName)\extern\poco-1.6.1\XML\include;$(SolutionDir)\$(SolutionName)\extern\tidy_html5\x32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-D__builtin_huge_val()=HUGE_VAL -D__builtin_huge_valf()=HUGE_VALF -D__builtin_nan=nan -D__builtin_nanf=nanf -D__builtin_nans=nan -D__builtin_nansf=nanf %(AdditionalOptions)</AdditionalOptions>
+      <Cpp0xSupport>true</Cpp0xSupport>
     </ClCompile>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -126,6 +127,7 @@
     <ClInclude Include="Call.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="DataMaps.h" />
+    <ClInclude Include="Dispatch.h" />
     <ClInclude Include="Incidents.h" />
     <ClInclude Include="or911.h" />
     <ClInclude Include="structs.h" />
@@ -137,6 +139,7 @@
     <ClCompile Include="Call.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="DataMaps.cpp" />
+    <ClCompile Include="Dispatch.cpp" />
     <ClCompile Include="Incidents.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Unit.cpp" />

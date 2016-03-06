@@ -31,46 +31,26 @@ bool Incidents::doesIncidentExist(Call & _call)
     return false;
 }
 
-void Incidents::gc()
+void Incidents::gc(int turn)
 {
-    deleteQueue.clear();
+    std::vector<IncidentHeader> toDelete;
 
-    std::vector<struct IncidentHeader> & dq = deleteQueue;
-    std::vector<struct IncidentHeader> & lastImportVar = lastImport; // std::functions doesn't like private alone.
-
-    // This gets a list of calls that have been deleted by WCCCA.
-    auto f = [&dq, &lastImportVar](const Call & _call) {
-        bool found = false;
-        const IncidentHeader & callHead = _call.getIncidentInfo();
-
-        for (auto imported_list : lastImportVar) {
-            if (imported_list.callNumber = callHead.callNumber && imported_list.county == callHead.county)
-                found = true;
-        }
-        if (!found) {
-            dq.push_back(callHead);
-        }
-        return true; 
-    };
-
-    this->ProcessCallList(f);
-
-    // Deletes everything in the list populated by the auto function f.
-    for (auto deleted_it : deleteQueue) {
-        const IncidentHeader & callHead = deleted_it;
-
-        if (callList[callHead.callNumber].count(callHead.county) > 1) {
-            callList[callHead.callNumber].erase(callHead.county);
-        }
-        else {
-            callList[callHead.callNumber].clear();
-        }
-
-        if (!(callList.count(callHead.callNumber) > 0)) {
-            callList.erase(callHead.callNumber);
+    // Search for invalid calls.
+    for (auto & callNumber_it : callList) {
+        for (auto & county_it : callNumber_it.second) {
+            if (county_it.second.getTurn() != turn) {
+                toDelete.push_back(county_it.second.getIncidentInfo());
+            }
         }
     }
-    lastImport.clear();
+
+    // Delete things in the vector from the real list.
+    for (std::vector<IncidentHeader>::iterator it = toDelete.begin(); it != toDelete.end(); ++it) {
+        callList[it->callNumber].erase(it->county);
+        if (!callList[it->callNumber].size()) {
+            callList.erase(it->callNumber);
+        }
+    }
 }
 
 const Call * Incidents::ProcessCallList(const std::function<bool(const class Call & _call)> & f)
@@ -80,16 +60,6 @@ const Call * Incidents::ProcessCallList(const std::function<bool(const class Cal
             if (!f(county_it.second)) {
                 return &county_it.second;
             }
-        }
-    }
-    return nullptr;
-}
-
-const struct IncidentHeader * Incidents::ProcessRecentlyDeleted(const std::function<bool(const struct IncidentHeader&_ih)>& f)
-{
-    for (auto & deleted_it : deleteQueue) {
-        if (!f(deleted_it)) {
-            return &deleted_it;
         }
     }
     return nullptr;
