@@ -165,6 +165,7 @@ namespace util
                 tidyBufAppend(&buf, &htmlArr[i], 1);
             }
             tidyResponseCode = tidyParseBuffer(tidyDoc, &buf);
+            tidyBufFree(&buf);
         }
 
         if (tidyResponseCode >= 0) {

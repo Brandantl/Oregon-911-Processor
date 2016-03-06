@@ -36,7 +36,6 @@ private:
     Poco::XML::NamedNodeMap* attributes;
 
     Poco::XML::NamedNodeMap* unit_attributes;
-    Poco::XML::Node* unit_attribute;
 
     std::string nName;
     std::string nValue;

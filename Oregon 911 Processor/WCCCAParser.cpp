@@ -26,7 +26,6 @@ void WCCCAParser::clearData()
     attribute = nullptr;
     attributes = nullptr;
     unit_attributes = nullptr;
-    unit_attribute = nullptr;
     callNumbers.clear();
     counties.clear();
     callSummeries.clear();
@@ -39,6 +38,7 @@ void WCCCAParser::clearData()
     units.clear();
     gpsData.clear();
     callList.clear();
+
 }
 
 void WCCCAParser::parse(const std::string & WCCCA_STR)
