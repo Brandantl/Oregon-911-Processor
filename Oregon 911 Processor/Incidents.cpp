@@ -75,7 +75,7 @@ void Incidents::gc()
 
 const Call * Incidents::ProcessCallList(const std::function<bool(const class Call & _call)> & f)
 {
-    for (auto  callNumber_it : callList) {
+    for (auto &  callNumber_it : callList) {
         for (auto & county_it : callNumber_it.second) {
             if (!f(county_it.second)) {
                 return &county_it.second;

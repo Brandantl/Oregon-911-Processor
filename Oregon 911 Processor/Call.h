@@ -59,18 +59,18 @@ public:
     std::string                                         getUnitsString() const;
     const std::string &                                 getAddress() const;
     std::string                                         getFlagsString() const;
-    const int &                                         getTurn();
-    const std::string &                                 getIcon();
+    const int &                                         getTurn() const;
+    const std::string &                                 getIcon() const;
 
     void                                                clearCallSummeryHistory();
     void                                                clearAddressHistory();
     void                                                clearLocationHistory();
 
     // Processes/Loops
-    const class Unit    *                               ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f);
-    const std::string   *                               ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f);
-    const std::string   *                               ProcessAddressHistory(const std::function<bool(const std::string & history)> & f);
-    const struct gps    *                               ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f);
+    const class Unit    *                               ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f) const;
+    const std::string   *                               ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f) const;
+    const std::string   *                               ProcessAddressHistory(const std::function<bool(const std::string & history)> & f) const;
+    const struct gps    *                               ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f) const;
 private:
     IncidentHeader                                      incidentInfo;
     std::string                                         time[MAX_NUM_CALL_STATUSES]; // 4 is the number of statuses. See callTime enum.

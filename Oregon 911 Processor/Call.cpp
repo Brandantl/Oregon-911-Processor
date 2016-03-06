@@ -145,7 +145,7 @@ int    Call::getUnitcount() const {
 
 std::string    Call::getUnitsString() const {
     std::string ret_str;
-    for (auto it : unitList) {
+    for (auto & it : unitList) {
         ret_str += it.second.getName();
         ret_str += " ,";
     }
@@ -163,19 +163,19 @@ const std::string & Call::getAddress() const
 std::string Call::getFlagsString() const
 {
     std::string ret_str;
-    for (auto it : Flags) {
+    for (auto & it : Flags) {
         ret_str += it.second.EventID;
         ret_str += ";";
     }
     return ret_str;
 }
 
-const int & Call::getTurn()
+const int & Call::getTurn() const
 {
     return Turn;
 }
 
-const std::string & Call::getIcon()
+const std::string & Call::getIcon() const
 {
     return Icon;
 }
@@ -196,7 +196,7 @@ void Call::clearLocationHistory()
 }
 
 // Processes/Loops
-const class Unit    *    Call::ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f) {
+const class Unit    *    Call::ProcessUnitList(const std::function<bool(const class Unit & _unit)> & f) const {
     for (auto & it : unitList) {
         if (!f(it.second)) {
             return &it.second;
@@ -206,30 +206,30 @@ const class Unit    *    Call::ProcessUnitList(const std::function<bool(const cl
     return nullptr;
 }
 
-const std::string    *    Call::ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f) {
-    for (std::vector<std::string>::iterator it = callSummeryHistory.begin(); it != callSummeryHistory.end(); ++it) {
-        if (!f(*it)) {
-            return &*it;
+const std::string    *    Call::ProcessCallSummeryHistory(const std::function<bool(const std::string & history)> & f) const {
+    for (auto & it : callSummeryHistory) {
+        if (!f(it)) {
+            return &(it);
             break;
         }
     }
     return nullptr;
 }
 
-const std::string    *    Call::ProcessAddressHistory(const std::function<bool(const std::string & history)> & f) {
-    for (std::vector<std::string>::iterator it = addressHistory.begin(); it != addressHistory.end(); ++it) {
-        if (!f(*it)) {
-            return &*it;
+const std::string    *    Call::ProcessAddressHistory(const std::function<bool(const std::string & history)> & f) const {
+    for (auto & it : addressHistory) {
+        if (!f(it)) {
+            return &(it);
             break;
         }
     }
     return nullptr;
 }
 
-const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f) {
-    for (std::vector<struct gps>::iterator it = locationHistory.begin(); it != locationHistory.end(); ++it) {
-        if (!f(*it)) {
-            return &*it;
+const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(const struct gps & _location)> & f) const {
+    for (auto & it : locationHistory) {
+        if (!f(it)) {
+            return &(it);
             break;
         }
     }
