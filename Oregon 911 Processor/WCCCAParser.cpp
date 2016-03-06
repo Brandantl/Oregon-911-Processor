@@ -20,7 +20,6 @@ const Call * WCCCAParser::ProcessCallList(const std::function<bool(const class C
     for (auto & it : callList) {
         if (!f(it)) {
             return &it;
-            break;
         }
     }
     return nullptr;

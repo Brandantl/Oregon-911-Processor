@@ -79,7 +79,6 @@ const Call * Incidents::ProcessCallList(const std::function<bool(const class Cal
         for (auto & county_it : callNumber_it.second) {
             if (!f(county_it.second)) {
                 return &county_it.second;
-                break;
             }
         }
     }
@@ -91,7 +90,6 @@ const struct IncidentHeader * Incidents::ProcessRecentlyDeleted(const std::funct
     for (auto & deleted_it : deleteQueue) {
         if (!f(deleted_it)) {
             return &deleted_it;
-            break;
         }
     }
     return nullptr;

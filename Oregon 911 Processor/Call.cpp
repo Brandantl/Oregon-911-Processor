@@ -200,7 +200,6 @@ const class Unit    *    Call::ProcessUnitList(const std::function<bool(const cl
     for (auto & it : unitList) {
         if (!f(it.second)) {
             return &it.second;
-            break;
         }
     }
     return nullptr;
@@ -210,7 +209,6 @@ const std::string    *    Call::ProcessCallSummeryHistory(const std::function<bo
     for (auto & it : callSummeryHistory) {
         if (!f(it)) {
             return &(it);
-            break;
         }
     }
     return nullptr;
@@ -220,7 +218,6 @@ const std::string    *    Call::ProcessAddressHistory(const std::function<bool(c
     for (auto & it : addressHistory) {
         if (!f(it)) {
             return &(it);
-            break;
         }
     }
     return nullptr;
@@ -230,7 +227,6 @@ const struct gps    *    Call::ProcessLocationHistory(const std::function<bool(c
     for (auto & it : locationHistory) {
         if (!f(it)) {
             return &(it);
-            break;
         }
     }
     return nullptr;
