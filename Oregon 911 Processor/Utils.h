@@ -101,7 +101,7 @@ namespace util
 
             // Set return string
             oss << is.rdbuf();
-           // content = { std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>() };
+            // content = { std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>() };
         }
         catch (Poco::Exception& e) {
             std::cerr << "Exception: " << e.what() << std::endl;
@@ -137,6 +137,7 @@ namespace util
     inline std::string tidyHTML(const std::string & HTML) {
         TidyDoc tidyDoc = tidyCreate();
         TidyBuffer tidyOutputBuffer = { 0 };
+        char * htmlArr = nullptr;
 
         bool configSuccess = tidyOptSetBool(tidyDoc, TidyXmlOut, yes)
             && tidyOptSetInt(tidyDoc, TidyWrapLen, 1200)
@@ -153,12 +154,15 @@ namespace util
         int tidyResponseCode = -1;
 
         if (configSuccess) {
-            std::vector<unsigned char> bytes(HTML.begin(), HTML.end());
+            size_t byteSize = HTML.size();
+            htmlArr = new char[byteSize + 1];
+            strncpy(htmlArr, HTML.c_str(), byteSize);
+            htmlArr[byteSize] = 0;
+
             TidyBuffer buf;
             tidyBufInit(&buf);
-            size_t byteSize = bytes.size();
             for (size_t i = 0; i < byteSize; i++) {
-                tidyBufAppend(&buf, &bytes[i], 1);
+                tidyBufAppend(&buf, &htmlArr[i], 1);
             }
             tidyResponseCode = tidyParseBuffer(tidyDoc, &buf);
         }
@@ -173,6 +177,8 @@ namespace util
         std::string ret = (char*)tidyOutputBuffer.bp;
         tidyBufFree(&tidyOutputBuffer);
         tidyRelease(tidyDoc);
+
+        delete[] htmlArr;
         return ret;
     }
 
