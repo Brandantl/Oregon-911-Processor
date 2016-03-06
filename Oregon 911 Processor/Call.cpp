@@ -14,7 +14,7 @@ Call::Call() {
     location.lon = 0;
     unitCount = 0;
     for (int i = 0; i < MAX_NUM_CALL_STATUSES; i++) {
-        time[i] = "00:00:00";
+        time[i] = TIME_NULL;
     }
     Turn = 0;
     agency = "Unknown";

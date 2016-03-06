@@ -13,7 +13,8 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
-using namespace std;
+using namespace std;
+
 bool print_call(const Call & c);
 bool print_unit(const Unit & u);
 

@@ -42,3 +42,4 @@
 // Misc stuff
 #define WCCCA_LOAD_MARKER       "LoadMarker"
 #define WCCCA_TIME_NULL         "--:--:--"
+#define TIME_NULL               "00:00:00"

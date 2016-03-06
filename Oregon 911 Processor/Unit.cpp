@@ -9,14 +9,14 @@
 Unit::Unit()
 {
     for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {
-        time[i] = "00:00:00";
+        time[i] = TIME_NULL;
     }
 }
 
 void Unit::updateUnit(const Unit & obj)
 {
     for (int i = 0; i < MAX_NUM_UNIT_STATUSES; i++) {
-        if (obj.time[i] != "00:00:00") {
+        if (obj.time[i] != TIME_NULL) {
             time[i] = obj.time[i];
         }
     }

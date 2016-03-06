@@ -178,7 +178,7 @@ void WCCCAParser::checkpNode(Poco::XML::Node * pNode, Poco::XML::NodeIterator & 
         timeTemp = pNode->innerText();
         if (!timeTemp.empty()) {
             if (timeTemp == WCCCA_TIME_NULL) {
-                cTime[(int)callTime::entry].push_back("00:00:00");
+                cTime[(int)callTime::entry].push_back(TIME_NULL);
             }
             else {
                 cTime[(int)callTime::entry].push_back(timeTemp);
@@ -189,7 +189,7 @@ void WCCCAParser::checkpNode(Poco::XML::Node * pNode, Poco::XML::NodeIterator & 
         timeTemp = pNode->innerText();
         if (!timeTemp.empty()) {
             if (timeTemp == WCCCA_TIME_NULL) {
-                cTime[(int)callTime::dispatch].push_back("00:00:00");
+                cTime[(int)callTime::dispatch].push_back(TIME_NULL);
             }
             else {
                 cTime[(int)callTime::dispatch].push_back(timeTemp);
@@ -200,7 +200,7 @@ void WCCCAParser::checkpNode(Poco::XML::Node * pNode, Poco::XML::NodeIterator & 
         timeTemp = pNode->innerText();
         if (!timeTemp.empty()) {
             if (timeTemp == WCCCA_TIME_NULL) {
-                cTime[(int)callTime::enroute].push_back("00:00:00");
+                cTime[(int)callTime::enroute].push_back(TIME_NULL);
             }
             else {
                 cTime[(int)callTime::enroute].push_back(timeTemp);
@@ -211,7 +211,7 @@ void WCCCAParser::checkpNode(Poco::XML::Node * pNode, Poco::XML::NodeIterator & 
         timeTemp = pNode->innerText();
         if (!timeTemp.empty()) {
             if (timeTemp == WCCCA_TIME_NULL) {
-                cTime[(int)callTime::onscene].push_back("00:00:00");
+                cTime[(int)callTime::onscene].push_back(TIME_NULL);
             }
             else {
                 cTime[(int)callTime::onscene].push_back(timeTemp);
